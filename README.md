@@ -1,4 +1,4 @@
-Reign Unity Plugin (Last Live Build was 136)
+Reign Unity Plugin - Unity5 edition (Last Live Build was 137)
 ==================
 The "dev" branch is used for adding breaking changes, while "master" is to be considered the stable or minor changes branch.
 
