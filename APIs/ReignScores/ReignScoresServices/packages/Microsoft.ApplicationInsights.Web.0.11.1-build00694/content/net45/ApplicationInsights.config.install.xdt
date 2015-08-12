@@ -1,0 +1,21 @@
+<ApplicationInsights schemaVersion="2014-05-30" xdt:Transform="SetAttributes" xmlns="http://schemas.microsoft.com/ApplicationInsights/2013/Settings" xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+
+  <ContextInitializers xdt:Transform="InsertIfMissing">
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.ComponentContextInitializer, Microsoft.ApplicationInsights" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.DeviceContextInitializer, Microsoft.ApplicationInsights" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.AzureRoleEnvironmentContextInitializer, Microsoft.ApplicationInsights.Extensibility.Web" />
+  </ContextInitializers>
+
+  <TelemetryInitializers xdt:Transform="InsertIfMissing">
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.TelemetryInitializers.WebOperationNameTelemetryInitializer, Microsoft.ApplicationInsights.Extensibility.Web" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.TelemetryInitializers.WebOperationIdTelemetryInitializer, Microsoft.ApplicationInsights.Extensibility.Web" />
+  </TelemetryInitializers>
+
+  <TelemetryModules xdt:Transform="InsertIfMissing">
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.WebApplicationLifecycleModule, Microsoft.ApplicationInsights.Extensibility.Web" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.RequestTracking.TelemetryModules.WebRequestTrackingTelemetryModule, Microsoft.ApplicationInsights.Extensibility.Web" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.RequestTracking.TelemetryModules.WebExceptionTrackingTelemetryModule, Microsoft.ApplicationInsights.Extensibility.Web" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.RequestTracking.TelemetryModules.WebSessionTrackingTelemetryModule, Microsoft.ApplicationInsights.Extensibility.Web" />
+    <Add xdt:Transform="InsertIfMissing" xdt:Locator="Match(Type)" Type="Microsoft.ApplicationInsights.Extensibility.Web.RequestTracking.TelemetryModules.WebUserTrackingTelemetryModule, Microsoft.ApplicationInsights.Extensibility.Web" />
+  </TelemetryModules>
+</ApplicationInsights>

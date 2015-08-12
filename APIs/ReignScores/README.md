@@ -1,0 +1,2 @@
+- ReignScoresConsole requires Unity 5.0 or higher.
+- ReignScoresServices requires Visual Studios 2013 or higher.

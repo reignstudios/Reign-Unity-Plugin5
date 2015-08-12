@@ -1,0 +1,9 @@
+﻿@{
+	Response.CacheControl = "no-cache";
+	Response.AppendHeader("Access-Control-Allow-Origin", "*");
+	Response.Write(ReignScores.Services.Clients.Client.DeleteGame
+	(
+		Request.Form["api_key"],
+		Request.Form["game_id"]
+	));
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- encoding="utf-8"-->
+<!-- NOTE: Change YOUR-URL to the appropriate path -->
+<!DOCTYPE cross-domain-policy SYSTEM "http://YOUR-URL/cross-domain-policy.dtd">
+<cross-domain-policy>
+	<allow-http-request-headers-from domain="*" headers="*"/>
+	<allow-access-from domain="*"/>
+	<site-control permitted-cross-domain-policies="all"/>
+</cross-domain-policy>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="Injector_Win32.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reign BB10 Injector" Height="389" Width="584" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+	<Grid>
+		<Image Source="Images/Logo.png" Width="64" Height="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+		<Label Content="BB10 Unity3D Injector" HorizontalAlignment="Left" Margin="89,21,0,0" VerticalAlignment="Top" FontSize="32" Grid.ColumnSpan="2"/>
+		<TextBlock Text="NOTE: Java7 must be installed! This will inject all your Scoreloop or Splash Image files into your Games .bar file  This is done by extracting your existing .bar file adding the data files and recompressing back the .bar file.  This will also modify settings in the manifest file bar-descriptor.xml" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="549" Height="68"/>
+
+		<Button Content="Apply" HorizontalAlignment="Left" Margin="484,0,0,84" VerticalAlignment="Bottom" Width="75" Click="Apply_Click"/>
+		<Button Content="Upload" HorizontalAlignment="Left" Margin="484,0,0,10" VerticalAlignment="Bottom" Width="75" Click="Upload_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,165" VerticalAlignment="Bottom" Width="75" Click="SelectUnity_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,137" VerticalAlignment="Bottom" Width="75" Click="SelectBar_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,109" VerticalAlignment="Bottom" Width="75" Click="SelectScoreloopPath_Click"/>
+		<TextBox Name="unityText" HorizontalAlignment="Left" Height="23" Margin="118,0,0,165" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="UnityPath_TextChanged"/>
+		<TextBox Name="barText" HorizontalAlignment="Left" Height="23" Margin="118,0,0,137" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="BarFileName_TextChanged"/>
+		<TextBox Name="scoreText" HorizontalAlignment="Left" Height="23" Margin="118,0,0,109" TextWrapping="NoWrap"  Text="" VerticalAlignment="Bottom" Width="361"  TextChanged="ScoreloopDataPath_TextChanged"/>
+		<TextBox Name="signText" HorizontalAlignment="Left" Height="23" Margin="118,0,0,82" TextWrapping="Wrap" Text="Key password..." VerticalAlignment="Bottom" Width="361"  TextChanged="signText_TextChanged"/>
+		<TextBox Name="phoneLockPass" HorizontalAlignment="Left" Height="23" Margin="118,0,0,10" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="phoneLockPass_TextChanged"/>
+		<TextBox Name="phoneIP" HorizontalAlignment="Left" Height="23" Margin="118,0,0,38" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="phoneIP_TextChanged"/>
+		<CheckBox Name="signCheck" Content="Sign .bar file:" HorizontalAlignment="Left" Margin="10,0,0,86" VerticalAlignment="Bottom" Width="103" Checked="signCheck_Checked" Unchecked="signCheck_Unchecked"/>
+		<Label Content="Unity Path:" HorizontalAlignment="Left" Margin="10,0,0,162" VerticalAlignment="Bottom" Width="94"/>
+		<Label Content="Bar File:" HorizontalAlignment="Left" Margin="10,0,0,134" VerticalAlignment="Bottom" Width="94"/>
+		<Label Content="SLAwards.bundle:" HorizontalAlignment="Left" Margin="10,0,0,110" VerticalAlignment="Bottom"/>
+		<Label Content="Phone IP:" HorizontalAlignment="Left" Margin="10,0,0,38" VerticalAlignment="Bottom"/>
+		<Label Content="Phone Lock Pass:" HorizontalAlignment="Left" Margin="10,0,0,11" VerticalAlignment="Bottom"/>
+		<CheckBox x:Name="unityClassicMode" Content="Unity4.3.4 Mode" HorizontalAlignment="Right" Margin="0,21,19,0" VerticalAlignment="Top" Width="109" Checked="classicMode_Checked" Unchecked="classicMode_Unchecked"/>
+	</Grid>
+</Window>

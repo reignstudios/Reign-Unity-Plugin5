@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReignScores", "ReignScoresServices\ReignScoresServices.csproj", "{33A0EB2B-BD0D-4AFE-9C57-831215700DB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{D318EEC3-A49B-4A45-88C8-3A4D26F38532}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{879B3D10-6947-4CC3-81A4-7E894D2B7419}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\ReignScores-WAWS-dev.json = PublishScripts\Configurations\ReignScores-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{15656233-5196-46C0-86AB-CE6826AF3B77}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33A0EB2B-BD0D-4AFE-9C57-831215700DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A0EB2B-BD0D-4AFE-9C57-831215700DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A0EB2B-BD0D-4AFE-9C57-831215700DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A0EB2B-BD0D-4AFE-9C57-831215700DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{879B3D10-6947-4CC3-81A4-7E894D2B7419} = {D318EEC3-A49B-4A45-88C8-3A4D26F38532}
+	EndGlobalSection
+EndGlobal

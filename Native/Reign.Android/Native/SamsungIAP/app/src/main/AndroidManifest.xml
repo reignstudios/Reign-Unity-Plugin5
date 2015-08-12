@@ -1,0 +1,29 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sec.android.iap.lib"
+    android:versionCode="201"
+    android:versionName="2.0.1">
+
+    <uses-sdk android:minSdkVersion="14"/>
+    
+    <!-- 
+    <uses-permission android:name="com.sec.android.iap.permission.BILLING"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
+    
+    <activity
+        android:name="com.sec.android.iap.lib.activity.InboxActivity"
+        android:theme="@style/Theme.Empty"
+        android:configChanges="orientation|screenSize"/>
+    
+    <activity
+        android:name="com.sec.android.iap.lib.activity.PaymentActivity"
+        android:theme="@style/Theme.Empty"
+        android:configChanges="orientation|screenSize"/>
+    
+    <activity
+        android:name="com.sec.android.iap.lib.activity.ItemActivity"
+        android:theme="@style/Theme.Empty"
+        android:configChanges="orientation|screenSize"/>
+    -->
+</manifest>

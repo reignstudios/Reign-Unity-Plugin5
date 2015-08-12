@@ -1,0 +1,43 @@
+Achievements - User achievements get saved here organized by the user and achievement IDs
+{
+	[ID] [uniqueidentifier] NOT NULL,
+	[UserID] [uniqueidentifier] NOT NULL,
+	[AchievementID] [uniqueidentifier] NOT NULL,
+	[PercentComplete] [float] NOT NULL,
+	[Date] [datetime] NOT NULL
+}
+
+Clients - Used to manage a set of games
+{
+	[ID] [uniqueidentifier] NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Password] [nchar](64) NOT NULL,
+	[DateCreated] [datetime] NOT NULL
+}
+
+Games - Used to manage a game and set of users
+{
+	[ID] [uniqueidentifier] NOT NULL,
+	[ClientID] [uniqueidentifier] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[DateCreated] [datetime] NOT NULL
+}
+
+Scores - Users scores get saved here organized by the user and leaderboard IDs
+{
+	[ID] [uniqueidentifier] NOT NULL,
+	[UserID] [uniqueidentifier] NOT NULL,
+	[LeaderboardID] [uniqueidentifier] NOT NULL,
+	[Score] [bigint] NOT NULL,
+	[Date] [datetime] NOT NULL
+}
+
+Users - Each user is associated with a game
+{
+	[ID] [uniqueidentifier] NOT NULL,
+	[GameID] [uniqueidentifier] NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Password] [nchar](64) NOT NULL,
+	[DateCreated] [datetime] NOT NULL
+}

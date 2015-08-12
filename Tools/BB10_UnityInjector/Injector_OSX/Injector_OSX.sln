@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Injector_OSX", "Injector_OSX\Injector_OSX.csproj", "{81E27144-90F5-457E-A39B-9A24F0D4F6BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		AppStore|x86 = AppStore|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.AppStore|x86.ActiveCfg = AppStore|x86
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.AppStore|x86.Build.0 = AppStore|x86
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.Debug|x86.ActiveCfg = Debug|x86
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.Debug|x86.Build.0 = Debug|x86
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.Release|x86.ActiveCfg = Release|x86
+		{81E27144-90F5-457E-A39B-9A24F0D4F6BE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Injector_OSX\Injector_OSX.csproj
+	EndGlobalSection
+EndGlobal

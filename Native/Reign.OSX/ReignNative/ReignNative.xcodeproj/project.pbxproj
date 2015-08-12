@@ -1,0 +1,261 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED7BC27A1A78BFD500A07FDC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7BC2791A78BFD500A07FDC /* Cocoa.framework */; };
+		ED7BC2841A78BFD500A07FDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED7BC2821A78BFD500A07FDC /* InfoPlist.strings */; };
+		ED7BC28D1A78BFF000A07FDC /* MessageBoxNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = ED7BC28C1A78BFF000A07FDC /* MessageBoxNative.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ED7BC2761A78BFD500A07FDC /* ReignNative.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReignNative.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7BC2791A78BFD500A07FDC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		ED7BC27C1A78BFD500A07FDC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		ED7BC27D1A78BFD500A07FDC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		ED7BC27E1A78BFD500A07FDC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ED7BC2811A78BFD500A07FDC /* ReignNative-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ReignNative-Info.plist"; sourceTree = "<group>"; };
+		ED7BC2831A78BFD500A07FDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED7BC2851A78BFD500A07FDC /* ReignNative-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReignNative-Prefix.pch"; sourceTree = "<group>"; };
+		ED7BC28B1A78BFF000A07FDC /* MessageBoxNative.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MessageBoxNative.h; sourceTree = "<group>"; };
+		ED7BC28C1A78BFF000A07FDC /* MessageBoxNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MessageBoxNative.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED7BC2731A78BFD500A07FDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7BC27A1A78BFD500A07FDC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED7BC26B1A78BFD500A07FDC = {
+			isa = PBXGroup;
+			children = (
+				ED7BC27F1A78BFD500A07FDC /* ReignNative */,
+				ED7BC2781A78BFD500A07FDC /* Frameworks */,
+				ED7BC2771A78BFD500A07FDC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED7BC2771A78BFD500A07FDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED7BC2761A78BFD500A07FDC /* ReignNative.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED7BC2781A78BFD500A07FDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED7BC2791A78BFD500A07FDC /* Cocoa.framework */,
+				ED7BC27B1A78BFD500A07FDC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED7BC27B1A78BFD500A07FDC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED7BC27C1A78BFD500A07FDC /* AppKit.framework */,
+				ED7BC27D1A78BFD500A07FDC /* CoreData.framework */,
+				ED7BC27E1A78BFD500A07FDC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		ED7BC27F1A78BFD500A07FDC /* ReignNative */ = {
+			isa = PBXGroup;
+			children = (
+				ED7BC2801A78BFD500A07FDC /* Supporting Files */,
+				ED7BC28B1A78BFF000A07FDC /* MessageBoxNative.h */,
+				ED7BC28C1A78BFF000A07FDC /* MessageBoxNative.mm */,
+			);
+			path = ReignNative;
+			sourceTree = "<group>";
+		};
+		ED7BC2801A78BFD500A07FDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED7BC2811A78BFD500A07FDC /* ReignNative-Info.plist */,
+				ED7BC2821A78BFD500A07FDC /* InfoPlist.strings */,
+				ED7BC2851A78BFD500A07FDC /* ReignNative-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED7BC2751A78BFD500A07FDC /* ReignNative */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7BC2881A78BFD500A07FDC /* Build configuration list for PBXNativeTarget "ReignNative" */;
+			buildPhases = (
+				ED7BC2721A78BFD500A07FDC /* Sources */,
+				ED7BC2731A78BFD500A07FDC /* Frameworks */,
+				ED7BC2741A78BFD500A07FDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReignNative;
+			productName = ReignNative;
+			productReference = ED7BC2761A78BFD500A07FDC /* ReignNative.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED7BC26D1A78BFD500A07FDC /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = ED7BC2701A78BFD500A07FDC /* Build configuration list for PBXProject "ReignNative" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ED7BC26B1A78BFD500A07FDC;
+			productRefGroup = ED7BC2771A78BFD500A07FDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED7BC2751A78BFD500A07FDC /* ReignNative */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED7BC2741A78BFD500A07FDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7BC2841A78BFD500A07FDC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED7BC2721A78BFD500A07FDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7BC28D1A78BFF000A07FDC /* MessageBoxNative.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ED7BC2821A78BFD500A07FDC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED7BC2831A78BFD500A07FDC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ED7BC2861A78BFD500A07FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		ED7BC2871A78BFD500A07FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		ED7BC2891A78BFD500A07FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ReignNative/ReignNative-Prefix.pch";
+				INFOPLIST_FILE = "ReignNative/ReignNative-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		ED7BC28A1A78BFD500A07FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ReignNative/ReignNative-Prefix.pch";
+				INFOPLIST_FILE = "ReignNative/ReignNative-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED7BC2701A78BFD500A07FDC /* Build configuration list for PBXProject "ReignNative" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7BC2861A78BFD500A07FDC /* Debug */,
+				ED7BC2871A78BFD500A07FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED7BC2881A78BFD500A07FDC /* Build configuration list for PBXNativeTarget "ReignNative" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7BC2891A78BFD500A07FDC /* Debug */,
+				ED7BC28A1A78BFD500A07FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ED7BC26D1A78BFD500A07FDC /* Project object */;
+}

@@ -1,0 +1,10 @@
+﻿@{
+	Response.CacheControl = "no-cache";
+	Response.AppendHeader("Access-Control-Allow-Origin", "*");
+	Response.Write(ReignScores.Services.Clients.Client.CreateGame
+	(
+		Request.Form["api_key"],
+		Request.Form["client_id"],
+		Request.Form["name"]
+	));
+}

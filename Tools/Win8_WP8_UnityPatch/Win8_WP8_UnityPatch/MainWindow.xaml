@@ -1,0 +1,19 @@
+﻿<Window x:Class="Win8_WP8_UnityPatch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reign Win8/WP8 Patch" Height="326" Width="484" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+	<Grid>
+		<Image Source="Images/Logo.png" Width="64" Height="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+		<Label Content="Win8/WP8 Unity3D Patch" Margin="89,21,10,0" VerticalAlignment="Top" FontSize="32"/>
+		<TextBlock Text="NOTE: This will replace Mono.Cecil with a patched version to fix build errors in Unity3D.  This should not any effect future Unity updates." TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="444" Height="59"/>
+
+		<Button Content="Patch Now" Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="Patch_Click"/>
+		<TextBlock Text="Files that will be replaced are located at the path below:" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,0,0,34" VerticalAlignment="Bottom" Width="376" Height="25"/>
+		<TextBox Name="patchDirectory" Margin="10,0,90,10" TextWrapping="NoWrap" Text="Patch Directory..." Height="23" VerticalAlignment="Bottom"/>
+
+		<Button Content="Restore" Margin="0,0,10,84" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="Restore_Click"/>
+		<TextBlock Text="This will restore Unity to its previous state:" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,0,0,112" VerticalAlignment="Bottom" Width="376" Height="25"/>
+		<TextBox Name="restoreDirectory" Margin="10,0,90,84" TextWrapping="NoWrap" Text="Restore Directory..." Height="23" VerticalAlignment="Bottom"/>
+		<Label Content="v1.1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+	</Grid>
+</Window>

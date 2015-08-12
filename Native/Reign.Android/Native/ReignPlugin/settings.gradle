@@ -1,0 +1,1 @@
+include ':app', ':reignnative', ':reignnativegoogleplay', ':reignnativeamazon', ':reignnativesamsung'

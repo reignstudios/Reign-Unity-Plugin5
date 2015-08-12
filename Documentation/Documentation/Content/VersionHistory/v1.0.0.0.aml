@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="3d914902-27bc-4777-9b46-3cc261392b15" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>No version history.
+			</para>
+		</introduction>
+
+		<section>
+			<title>Blank</title>
+			<content>
+
+				<list class="bullet">
+					<listItem>
+						<para>Blank...</para>
+					</listItem>
+
+				</list>
+
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="bf85cbeb-be64-466d-92df-2fed4ee0e700" />
+		</relatedTopics>
+
+	</developerConceptualDocument>
+</topic>

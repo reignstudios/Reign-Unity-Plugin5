@@ -1,0 +1,26 @@
+﻿<Window x:Class="Injector_Win32.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reign Android Injector" Height="377" Width="584" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+	<Grid>
+		<Image Source="Images/Logo.png" Width="64" Height="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+		<Label Content="Android Unity3D Injector" HorizontalAlignment="Left" Margin="89,21,0,0" VerticalAlignment="Top" FontSize="32" Grid.ColumnSpan="2"/>
+		<TextBlock Text="NOTE: Java7 must be installed! This will inject all your GooglePlay Services files into your Games .apk file.  This is done by extracting your existing .apk file adding the data files and recompressing back the .apk file." TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="549" Height="68"/>
+
+		<Button Content="Apply" HorizontalAlignment="Left" Margin="484,0,0,82" VerticalAlignment="Bottom" Width="75" Click="Apply_Click"/>
+		<Button Content="Upload" HorizontalAlignment="Left" Margin="484,0,0,10" VerticalAlignment="Bottom" Width="75" Click="Upload_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,165" VerticalAlignment="Bottom" Width="75" Click="SelectUnity_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,137" VerticalAlignment="Bottom" Width="75" Click="SelectBar_Click"/>
+		<Button Content="Select" HorizontalAlignment="Left" Margin="484,0,0,109" VerticalAlignment="Bottom" Width="75" Click="SelectScoreloopPath_Click"/>
+		<TextBox Name="unityPath" HorizontalAlignment="Left" Height="23" Margin="118,0,0,165" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="UnityPath_TextChanged"/>
+		<TextBox Name="apkFile" HorizontalAlignment="Left" Height="23" Margin="118,0,0,137" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="361" TextChanged="BarFileName_TextChanged"/>
+		<TextBox Name="androidPath" HorizontalAlignment="Left" Height="23" Margin="118,0,0,109" TextWrapping="NoWrap"  Text="" VerticalAlignment="Bottom" Width="361"  TextChanged="ScoreloopDataPath_TextChanged"/>
+		<TextBox Name="signText" HorizontalAlignment="Left" Height="23" Margin="118,0,0,82" TextWrapping="Wrap" Text="Key password..." VerticalAlignment="Bottom" Width="361"  TextChanged="signText_TextChanged"/>
+		<TextBox Name="phoneIP" HorizontalAlignment="Left" Height="23" Margin="163,0,0,10" TextWrapping="NoWrap" Text="" VerticalAlignment="Bottom" Width="316" TextChanged="phoneIP_TextChanged"/>
+		<CheckBox Name="signCheck" Content="Sign .apk file:" HorizontalAlignment="Left" Margin="10,0,0,87" VerticalAlignment="Bottom" Width="103" Checked="signCheck_Checked" Unchecked="signCheck_Unchecked"/>
+		<Label Content="Unity Path:" HorizontalAlignment="Left" Margin="10,0,0,162" VerticalAlignment="Bottom" Width="94"/>
+		<Label Content="Apk File:" HorizontalAlignment="Left" Margin="10,0,0,134" VerticalAlignment="Bottom" Width="94"/>
+		<Label Content="Android SDK Path:" HorizontalAlignment="Left" Margin="10,0,0,110" VerticalAlignment="Bottom"/>
+		<Label Content="Phone IP or black for USB:" HorizontalAlignment="Left" Margin="10,0,0,11" VerticalAlignment="Bottom"/>
+	</Grid>
+</Window>

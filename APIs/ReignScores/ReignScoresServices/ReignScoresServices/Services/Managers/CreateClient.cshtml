@@ -1,0 +1,11 @@
+﻿@{
+	Response.CacheControl = "no-cache";
+	Response.AppendHeader("Access-Control-Allow-Origin", "*");
+	Response.Write(ReignScores.Services.Managers.Manager.CreateClient
+	(
+		Request.Form["api_key"],
+		Request.Form["username"],
+		Request.Form["email"],
+		Request.Form["password"]
+	));
+}

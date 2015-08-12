@@ -1,0 +1,12 @@
+﻿@{
+	Response.CacheControl = "no-cache";
+	Response.AppendHeader("Access-Control-Allow-Origin", "*");
+	Response.Write(ReignScores.Services.Games.Game.RequestScores
+	(
+		Request.Form["api_key"],
+		Request.Form["leaderboard_id"],
+		Request.Form["offset"],
+		Request.Form["range"],
+		Request.Form["sort_order"]
+	));
+}

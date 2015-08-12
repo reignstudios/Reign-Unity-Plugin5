@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="34b3d36e-28df-47b5-8f2f-d4e48f5146a8" revisionNumber="1">
+	<developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<introduction>
+			<para>These docs will help describe the Reign Unity Plugin code.</para>
+		</introduction>
+
+		<section>
+			<title>Getting Started</title>
+			<content>
+				<para>Use the left hand side to navigate the contents of the docs.</para>
+			</content>
+		</section>
+
+		<relatedTopics>
+			<link xlink:href="bf85cbeb-be64-466d-92df-2fed4ee0e700" />
+		</relatedTopics>
+	</developerConceptualDocument>
+</topic>
