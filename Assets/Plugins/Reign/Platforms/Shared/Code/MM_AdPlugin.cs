@@ -440,10 +440,21 @@ namespace Reign.Plugin
 				yield break;
 			}
 
-			var xml = new XmlSerializer(typeof(Reign.MM_AdXML.Ad));
-			using (var data = new MemoryStream(www.bytes))
+			try
 			{
-				adMeta = (Reign.MM_AdXML.Ad)xml.Deserialize(data);
+				var xml = new XmlSerializer(typeof(Reign.MM_AdXML.Ad));
+				var str = System.Text.Encoding.Default.GetString(www.bytes).Replace(@"[:_mm_campaignid:]&[:_mm_advertiserid:]?", "");
+				using (var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(str)))
+				{
+					adMeta = (Reign.MM_AdXML.Ad)xml.Deserialize(stream);
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.LogError(e.Message);
+				Debug.LogError("Responce Text: " + www.text);
+				if (adEvent != null) adEvent(AdEvents.Error, e.Message);
+				yield break;
 			}
 
 			string imageURL = adMeta.image.url.Content;
