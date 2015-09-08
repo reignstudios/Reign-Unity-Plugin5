@@ -65,11 +65,7 @@ namespace Reign.EditorTools
 					saveActiveLayoutAsDefault("Linux");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.WSAPlayer:
-				#else
-				case BuildTarget.MetroPlayer:
-				#endif
 					saveActiveLayoutAsDefault("WinRT");
 					break;
 
@@ -77,11 +73,7 @@ namespace Reign.EditorTools
 					saveActiveLayoutAsDefault("WP8");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.iOS:
-				#else
-				case BuildTarget.iPhone:
-				#endif
 					saveActiveLayoutAsDefault("iOS");
 					break;
 
@@ -106,11 +98,9 @@ namespace Reign.EditorTools
 					saveActiveLayoutAsDefault("WebPlayer");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.WebGL:
-					saveActiveLayoutAsDefault("WebPlayer");
+					saveActiveLayoutAsDefault("WebGL");
 					break;
-				#endif
 
 				case BuildTarget.PSM:
 				case BuildTarget.PSP2:
@@ -159,11 +149,7 @@ namespace Reign.EditorTools
 					applyDefaultLayout("Linux");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.WSAPlayer:
-				#else
-				case BuildTarget.MetroPlayer:
-				#endif
 					applyDefaultLayout("WinRT");
 					break;
 
@@ -171,11 +157,7 @@ namespace Reign.EditorTools
 					applyDefaultLayout("WP8");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.iOS:
-				#else
-				case BuildTarget.iPhone:
-				#endif
 					applyDefaultLayout("iOS");
 					break;
 
@@ -200,11 +182,9 @@ namespace Reign.EditorTools
 					applyDefaultLayout("WebPlayer");
 					break;
 
-				#if UNITY_5
 				case BuildTarget.WebGL:
-					applyDefaultLayout("WebPlayer");
+					applyDefaultLayout("WebGL");
 					break;
-				#endif
 
 				case BuildTarget.PSM:
 				case BuildTarget.PSP2:

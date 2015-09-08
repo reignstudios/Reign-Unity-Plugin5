@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application>
+		<activity>
+			<!-- Ad event pass-through -->
+			<meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true"/>
+		</activity>
+	</application>
+
+	<!-- Needed for most services -->
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Needed for Bluetooth audio -->
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+
+	<!-- Required for Camera and some other services -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<!-- May be Required for some devices and features to work correctly -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+</manifest>

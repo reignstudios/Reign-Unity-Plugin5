@@ -443,7 +443,11 @@ namespace Reign.Plugin
 			try
 			{
 				var xml = new XmlSerializer(typeof(Reign.MM_AdXML.Ad));
+				#if UNITY_WINRT
+				var str = System.Text.Reign.Encoding.Singleton.GetString(www.bytes, 0, www.bytes.Length).Replace(@"[:_mm_campaignid:]&[:_mm_advertiserid:]?", "");
+				#else
 				var str = System.Text.Encoding.Default.GetString(www.bytes).Replace(@"[:_mm_campaignid:]&[:_mm_advertiserid:]?", "");
+				#endif
 				using (var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(str)))
 				{
 					adMeta = (Reign.MM_AdXML.Ad)xml.Deserialize(stream);

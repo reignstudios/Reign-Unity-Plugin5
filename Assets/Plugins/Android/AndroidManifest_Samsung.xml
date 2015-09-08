@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application>
+		<!-- Smasung IAP -->
+		<activity android:name="com.samsung.android.sdk.iap.lib.activity.InboxActivity" android:theme="@style/Theme.Empty" android:configChanges="orientation|screenSize"/>
+		<activity android:name="com.samsung.android.sdk.iap.lib.activity.PaymentActivity" android:theme="@style/Theme.Empty" android:configChanges="orientation|screenSize"/>
+		<activity android:name="com.samsung.android.sdk.iap.lib.activity.ItemActivity" android:theme="@style/Theme.Empty" android:configChanges="orientation|screenSize"/>
+	</application>
+
+	<!-- Required for Samsung IAP -->
+	<uses-permission android:name="com.sec.android.iap.permission.BILLING" />
+</manifest>

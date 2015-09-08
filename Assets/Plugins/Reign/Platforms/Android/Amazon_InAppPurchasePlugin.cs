@@ -26,7 +26,7 @@ namespace Reign.Plugin
 				testTrialMode = desc.TestTrialMode;
 				InAppIDs = desc.Android_Amazon_InAppIDs;
 				
-				native = new AndroidJavaClass("com.reignstudios.reignnative.Amazon_InAppPurchaseNative");
+				native = new AndroidJavaClass("com.reignstudios.reignnativeamazon.Amazon_InAppPurchaseNative");
 				string skus = "", types = "";
 				foreach (var app in desc.Android_Amazon_InAppIDs)
 				{

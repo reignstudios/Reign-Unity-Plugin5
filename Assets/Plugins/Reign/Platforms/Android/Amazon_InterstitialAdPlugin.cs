@@ -17,7 +17,7 @@ namespace Reign.Plugin
 			try
 			{
 				eventCallback = desc.EventCallback;
-				native = new AndroidJavaClass("com.reignstudios.reignnative.Amazon_InterstitialAdNative");
+				native = new AndroidJavaClass("com.reignstudios.reignnativeamazon.Amazon_InterstitialAdNative");
 				id = Guid.NewGuid().ToString();
 				native.CallStatic("CreateAd", desc.Android_Amazon_ApplicationKey, desc.Testing, id);
 			}

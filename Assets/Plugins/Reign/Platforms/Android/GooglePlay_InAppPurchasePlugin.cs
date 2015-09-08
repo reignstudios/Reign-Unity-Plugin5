@@ -26,7 +26,7 @@ namespace Reign.Plugin
 				testTrialMode = desc.TestTrialMode;
 				InAppIDs = desc.Android_GooglePlay_InAppIDs;
 				
-				native = new AndroidJavaClass("com.reignstudios.reignnative.GooglePlay_InAppPurchaseNative");
+				native = new AndroidJavaClass("com.reignstudios.reignnativegoogleplay.GooglePlay_InAppPurchaseNative");
 				string skus = "", types = "";
 				foreach (var app in desc.Android_GooglePlay_InAppIDs)
 				{

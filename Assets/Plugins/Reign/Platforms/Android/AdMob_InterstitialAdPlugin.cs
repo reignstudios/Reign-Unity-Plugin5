@@ -17,7 +17,7 @@ namespace Reign.Plugin
 			try
 			{
 				eventCallback = desc.EventCallback;
-				native = new AndroidJavaClass("com.reignstudios.reignnative.AdMob_InterstitialAdNative");
+				native = new AndroidJavaClass("com.reignstudios.reignnativegoogleplay.AdMob_InterstitialAdNative");
 				id = Guid.NewGuid().ToString();
 				native.CallStatic("CreateAd", desc.Android_AdMob_UnitID, desc.Testing, id);
 			}

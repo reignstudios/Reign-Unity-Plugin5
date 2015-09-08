@@ -26,7 +26,7 @@ namespace Reign.Plugin
 				testTrialMode = desc.TestTrialMode;
 				InAppIDs = desc.Android_Samsung_InAppIDs;
 
-				native = new AndroidJavaClass("com.reignstudios.reignnative.Samsung_InAppPurchaseNative");
+				native = new AndroidJavaClass("com.reignstudios.reignnativesamsung.Samsung_InAppPurchaseNative");
 				string skus = "", types = "";
 				foreach (var app in desc.Android_Samsung_InAppIDs)
 				{

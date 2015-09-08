@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D0287EAC-3905-B6E4-A6BE-AB411B81ACDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile>Assets\gmcs.rsp</CompilerResponseFile>
+    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>5.2.0f3</UnityVersion>
+    <RootNamespace></RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_2_0;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;SAMSUNG;</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_2_0;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;SAMSUNG;</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WP8.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WP8.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Metro.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Metro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Tizen.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Tizen.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.SamsungTV.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.SamsungTV.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.OSXStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="Reign.EditorTools">
+      <HintPath>Assets\Editor\Reign\Reign.EditorTools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Reign-Unity-Plugin5.CSharp.Plugins.csproj">
+      <Project>{1D480C43-A14D-88EC-50ED-727B087DED62}</Project>
+      <Name>Reign-Unity-Plugin5.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Editor\Reign\Input\InputTools.cs" />
+    <Compile Include="Assets\Editor\Reign\ManifestTools\ManifestTools.cs" />
+    <Compile Include="Assets\Editor\Reign\PublisherOnly\ExportPlugins.cs" />
+    <Compile Include="Assets\Editor\Reign\Tools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Editor\Reign\ManifestTools\DefaultAndroidManifests\AndroidManifest_Amazon.xml" />
+    <None Include="Assets\Editor\Reign\ManifestTools\DefaultAndroidManifests\AndroidManifest_GooglePlay.xml" />
+    <None Include="Assets\Editor\Reign\ManifestTools\DefaultAndroidManifests\AndroidManifest_Samsung.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest_Amazon.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest_Base.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest_GooglePlay.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest_Samsung.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\compiler.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\copyright\profiles_settings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\encodings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\gradle.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\misc.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\modules.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\runConfigurations.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\idea\vcs.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Amazon\drawable\gc_overlay_spinner.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Amazon\drawable\rounded_corners.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Amazon\layout\modal_alert_container.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Amazon\layout\modal_overlay_container.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Amazon\values\amazon_gc_styles.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\color\common_signin_btn_text_dark.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\color\common_signin_btn_text_light.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\color\wallet_primary_text_holo_light.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\color\wallet_secondary_text_holo_dark.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\drawable\cast_ic_notification_connecting.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\drawable\common_signin_btn_icon_dark.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\drawable\common_signin_btn_icon_light.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\drawable\common_signin_btn_text_dark.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\drawable\common_signin_btn_text_light.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-af\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-am\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ar\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-az-rAZ\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-bg\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-bn-rBD\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ca\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-cs\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-da\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-de\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-el\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-en-rAU\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-en-rGB\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-en-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-es-rUS\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-es\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-es\wallet_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-et-rEE\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-eu-rES\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-fa\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-fi\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-fr-rCA\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-fr\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-gl-rES\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-gu-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-hi\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-hr\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-hu\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-hy-rAM\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-in\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-is-rIS\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-it\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-iw\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ja\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ka-rGE\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-kk-rKZ\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-km-rKH\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-kn-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ko\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ky-rKG\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-lo-rLA\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-lt\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-lv\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-mk-rMK\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ml-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-mn-rMN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-mr-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ms-rMY\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-my-rMM\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-nb\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ne-rNP\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-nl\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-pa-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-pl\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-pt-rBR\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-pt-rPT\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-pt\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ro\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ru\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-si-rLK\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sk\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sl\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sq-rAL\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sr\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sv\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-sw\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ta-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-te-rIN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-th\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-tl\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-tr\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-uk\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-ur-rPK\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-uz-rUZ\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-vi\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-zh-rCN\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-zh-rHK\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-zh-rTW\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values-zu\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\admob_ads_attrs.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\admob_iap_style.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\admob_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\auth_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\cast_ids.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\cast_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\common_attrs.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\common_colors.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\common_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\maps_attrs.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\version.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\wallet_attrs.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\wallet_colors.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\wallet_strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\GooglePlay\values\wallet_styles.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\drawable\progressbar_middle.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\layout\progress_dialog.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ar\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-az\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-bg\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-bn\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ca\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-cs\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-da\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-de\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-el\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-en-rGB\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-en-rPH\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-en-rUS\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-en\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rAR\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rBO\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rCL\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rCO\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rCR\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rCU\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rDO\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rEC\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rGT\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rGY\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rHN\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rHT\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rMX\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rNI\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rPA\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rPE\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rPR\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rPY\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rSV\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rUS\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rUY\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es-rVE\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-es\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-et\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-eu\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-fa\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-fi\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-fr-rCA\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-fr\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ga\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-gl\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-gu\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ha\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-he\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-hi\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-hr\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-hu\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-hy\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-id\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ig\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-in\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-is\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-it\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-iw\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ja\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ka\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-kk\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-kn\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ko\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-lt\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-lv\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-mk\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ml\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-mr\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ms\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-nb\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-nl\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-pa\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-pl\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-pt-rBR\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-pt\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ro\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ru\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-sk\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-sl\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-sr\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-sv\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ta\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-te\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-th\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-tr\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-uk\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-ur\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-v11\styles.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-v14\styles.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-vi\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-yo\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-zh-rHK\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-zh-rSG\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-zh-rTW\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values-zh\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values\dimen.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values\strings.xml" />
+    <None Include="Assets\Plugins\Android\ReignPostBuildResources\res\Samsung\values\styles.xml" />
+    <None Include="Assets\Plugins\Android\assets\api_key.txt" />
+    <None Include="Assets\Plugins\Reign\ReadMe.txt" />
+    <None Include="Assets\Plugins\WP8\GoogleAds.XML" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
+</Project>

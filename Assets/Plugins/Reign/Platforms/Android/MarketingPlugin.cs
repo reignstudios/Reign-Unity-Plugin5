@@ -10,9 +10,9 @@ namespace Reign.Plugin
 		
 		public MarketingPlugin_Android()
 		{
-			nativeGooglePlay = new AndroidJavaClass("com.reignstudios.reignnative.GooglePlay_MarketingNative");
-			nativeAmazon = new AndroidJavaClass("com.reignstudios.reignnative.Amazon_MarketingNative");
-			nativeSamsung = new AndroidJavaClass("com.reignstudios.reignnative.Samsung_MarketingNative");
+			nativeGooglePlay = new AndroidJavaClass("com.reignstudios.reignnativegoogleplay.GooglePlay_MarketingNative");
+			nativeAmazon = new AndroidJavaClass("com.reignstudios.reignnativeamazon.Amazon_MarketingNative");
+			nativeSamsung = new AndroidJavaClass("com.reignstudios.reignnativesamsung.Samsung_MarketingNative");
 		}
     
     	public void OpenStore(MarketingDesc desc)

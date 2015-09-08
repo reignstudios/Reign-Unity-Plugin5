@@ -14,26 +14,26 @@ namespace Reign.EditorTools
 {
 	public static class ManifestTools
 	{
-		[MenuItem("Edit/Reign/Manifests/Merge Reign Android Manifest")]
-		static void MergeAndroidManifest()
-		{
-			if (!EditorUtility.DisplayDialog("Android Manifest Merge Tool", "Are you sure? You can also reference ReignAndroidManifest.xml and manually merge.\n\nThis tool will merge ReignAndroidManifest.xml with AndroidManifest.xml", "Ok", "Cancel")) return;
+		//[MenuItem("Edit/Reign/Manifests/Merge Reign Android Manifest")]
+		//static void MergeAndroidManifest()
+		//{
+		//	if (!EditorUtility.DisplayDialog("Android Manifest Merge Tool", "Are you sure? You can also reference ReignAndroidManifest.xml and manually merge.\n\nThis tool will merge ReignAndroidManifest.xml with AndroidManifest.xml", "Ok", "Cancel")) return;
 	
-			XDocument mainDoc = XDocument.Load(Application.dataPath+"/Plugins/Android/AndroidManifest.xml");
-			XDocument reignDoc = XDocument.Load(Application.dataPath+"/Plugins/Android/ReignAndroidManifest.xml");
-			var context = reignDoc.Descendants("Types").Descendants("Type").Except(mainDoc.Descendants("Types").Descendants("Type")).ToArray();
-			mainDoc.Root.Add(context);
+		//	XDocument mainDoc = XDocument.Load(Application.dataPath+"/Plugins/Android/AndroidManifest.xml");
+		//	XDocument reignDoc = XDocument.Load(Application.dataPath+"/Plugins/Android/ReignAndroidManifest.xml");
+		//	var context = reignDoc.Descendants("Types").Descendants("Type").Except(mainDoc.Descendants("Types").Descendants("Type")).ToArray();
+		//	mainDoc.Root.Add(context);
 		
-			var settings = new XmlWriterSettings();
-			settings.Indent = true;
-			settings.IndentChars = "\t";
-			using (var writer = XmlWriter.Create(Application.dataPath+"/Plugins/Android/AndroidManifest.xml", settings))
-			{
-				mainDoc.WriteTo(writer);
-			}
+		//	var settings = new XmlWriterSettings();
+		//	settings.Indent = true;
+		//	settings.IndentChars = "\t";
+		//	using (var writer = XmlWriter.Create(Application.dataPath+"/Plugins/Android/AndroidManifest.xml", settings))
+		//	{
+		//		mainDoc.WriteTo(writer);
+		//	}
 		
-			EditorUtility.DisplayDialog("Android Manifest Merge Tool", "Successful!", "Ok");
-		}
+		//	EditorUtility.DisplayDialog("Android Manifest Merge Tool", "Successful!", "Ok");
+		//}
 
 		[MenuItem("Edit/Reign/Manifests/Save current AndroidManifest")]
 		static void SaveCustomManifiest()

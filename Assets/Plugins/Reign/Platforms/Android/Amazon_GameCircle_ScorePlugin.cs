@@ -25,7 +25,7 @@ namespace Reign.Plugin
 			this.desc = desc;
 			try
 			{
-				native = new AndroidJavaClass("com.reignstudios.reignnative.Amazon_GameCircle_LeaderboardsAchievements");
+				native = new AndroidJavaClass("com.reignstudios.reignnativeamazon.Amazon_GameCircle_LeaderboardsAchievements");
 				native.CallStatic("Init");
 			}
 			catch (Exception e)

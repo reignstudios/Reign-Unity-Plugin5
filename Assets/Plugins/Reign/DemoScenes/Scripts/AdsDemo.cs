@@ -118,7 +118,7 @@ public class AdsDemo : MonoBehaviour
 		desc.Android_AdAPI = AdAPIs.AdMob;// Choose between AdMob or Amazon
 		#endif
 			
-		desc.Android_AdMob_UnitID = "";// NOTE: You MUST have this even for Testing!
+		desc.Android_AdMob_UnitID = "ca-app-pub-2176319445832370/3757406843";// NOTE: You MUST have this even for Testing!
 		desc.Android_AdMob_AdGravity = AdGravity.BottomCenter;
 		desc.Android_AdMob_AdSize = Android_AdMob_AdSize.Banner_320x50;
 			

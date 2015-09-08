@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application>
+		<!-- AdMob Activity -->
+		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+
+		<!-- GooglePlay Services Version -->
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+
+		<!-- GooglePlay Leaderboards / Achievements (NOTE: Set 'xxxxxxxxxxxx' to your Game Services AppID) -->
+		<meta-data android:name="com.google.android.gms.appstate.APP_ID" android:value="\ xxxxxxxxxxxx" />
+		<meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ xxxxxxxxxxxx" />
+	</application>
+
+	<!-- Required for AdMod, InApp purchases and Leaderboards / Achievements -->
+  <uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Required for AdMod and Leaderboards / Achievements -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+	<!-- Required for GooglePlay IAP -->
+	<uses-permission android:name="com.android.vending.BILLING" />
+
+	<!-- Required for GooglePlay Leaderboards / Achievements -->
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+</manifest>

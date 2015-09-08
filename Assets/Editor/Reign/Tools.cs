@@ -15,7 +15,7 @@ using System.Text;
 using System;
 using System.Collections.Generic;
 
-#if UNITY_IOS && UNITY_5
+#if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 #endif
 
@@ -41,7 +41,7 @@ namespace Reign.EditorTools
 			Debug.Log("Src Folder: " + src);
 			Debug.Log("Dst Folder: " + dst);
 			var files = new List<string>();
-			gatherFilePaths(src, files);
+			gatherFilePaths(src, files, true);
 			foreach (var file in files)
 			{
 				string newDst = dst + file.Substring(src.Length);
@@ -53,7 +53,7 @@ namespace Reign.EditorTools
 			Debug.Log("Merge Folders Done!");
 		}
 
-		static void gatherFilePaths(string path, List<string> files)
+		static void gatherFilePaths(string path, List<string> files, bool recursive)
 		{
 			// add files in path
 			var dir = new DirectoryInfo(path);
@@ -63,9 +63,10 @@ namespace Reign.EditorTools
 			}
 
 			// add sub paths
+			if (recursive)
 			foreach (var subPath in Directory.GetDirectories(path))
 			{
-				gatherFilePaths(subPath, files);
+				gatherFilePaths(subPath, files, recursive);
 			}
 		}
 
@@ -245,23 +246,11 @@ namespace Reign.EditorTools
 		[PostProcessBuild]
 		static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
 		{
-			#if UNITY_5
 			if (target == BuildTarget.WSAPlayer || target == BuildTarget.WP8Player)
-			#else
-			if (target == BuildTarget.MetroPlayer || target == BuildTarget.WP8Player)
-			#endif
 			{
-				#if UNITY_WP8 || UNITY_5
-				var productName = PlayerSettings.productName.Replace(" ", "").Replace("_", "");
-				#else
 				var productName = PlayerSettings.productName;
-				#endif
 				
-				#if UNITY_5
 				if (EditorUserBuildSettings.wsaSDK == WSASDK.UniversalSDK81 && EditorUserBuildSettings.activeBuildTarget != BuildTarget.WP8Player)
-				#else
-				if (EditorUserBuildSettings.metroSDK == MetroSDK.UniversalSDK81 && EditorUserBuildSettings.activeBuildTarget != BuildTarget.WP8Player)
-				#endif
 				{
 					var projPath = string.Format("{0}/{1}/{1}.Shared/{1}.Shared.projItems", pathToBuiltProject, productName);
 					Debug.Log("Modifying Proj: " + projPath);
@@ -292,7 +281,7 @@ namespace Reign.EditorTools
 					doc.Save(projPath);
 				}
 			}
-			#if UNITY_IOS && UNITY_5
+			#if UNITY_IOS
 			else if (target == BuildTarget.iOS)
 			{
 				string projPath = pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
@@ -357,8 +346,273 @@ namespace Reign.EditorTools
 				}
 			}
 			#endif
+			else if (target == BuildTarget.Android)
+			{
+				if (!EditorUserBuildSettings.exportAsGoogleAndroidProject)
+				{
+					Debug.LogWarning("Reign post build step canceled.  Must export as GoogleAndroidProject to use the Reign plugin.");
+					return;
+				}
+
+				Debug.Log("Processing Android Proj: " + pathToBuiltProject + '/' + PlayerSettings.productName);
+				androidPostBuild(target, pathToBuiltProject + '/' + PlayerSettings.productName);
+			}
     	}
 		#endregion
+
+		[MenuItem("ReignTest/AndroidBuildTest")]
+		static void testAndroidBUILD()
+		{
+			androidPostBuild(BuildTarget.Android, @"C:\Users\zezba\Dev\Reign\Reign-Unity-Plugin5-Builds\Android\Reign Unity Plugin");
+		}
+
+		private static void androidPostBuild(BuildTarget target, string pathToBuiltProject)
+		{
+			pathToBuiltProject = pathToBuiltProject.Replace(@"\", "/");
+			string rootPath = Path.GetDirectoryName(pathToBuiltProject);
+			#if GOOGLEPLAY
+			string postBuildName = "GooglePlay";
+			#elif AMAZON
+			string postBuildName = "Amazon";
+			#elif SAMSUNG
+			string postBuildName = "Samsung";
+			#else
+			string postBuildName = "";
+			#endif
+			string mainPath = pathToBuiltProject.Substring(rootPath.Length).Replace(' ', '_').Replace("/", "").Replace(@"\", "") + "_PostBuild" + postBuildName;
+			string fullPath = rootPath + '/' + mainPath;
+			bool mergeMode = true;
+			if (!Directory.Exists(fullPath))
+			{
+				mergeMode = false;
+				Directory.CreateDirectory(fullPath);
+			}
+			
+			// create paths
+			Directory.CreateDirectory(fullPath + "/app/libs");
+			Directory.CreateDirectory(fullPath + "/app/src/main/assets");
+			Directory.CreateDirectory(fullPath + "/app/src/main/aidl");
+			Directory.CreateDirectory(fullPath + "/app/src/main/java");
+			Directory.CreateDirectory(fullPath + "/app/src/main/jniLibs");
+			Directory.CreateDirectory(fullPath + "/app/src/main/res");
+			Directory.CreateDirectory(fullPath + "/gradle");
+			Directory.CreateDirectory(fullPath + "/.idea/copyright");
+			
+			// copy app files
+			if (!mergeMode) File.Copy(pathToBuiltProject+"/AndroidManifest.xml", fullPath+"/app/src/main/AndroidManifest.xml", true);
+			mergeFolders(pathToBuiltProject+"/assets", fullPath+"/app/src/main/assets", true, false);
+			mergeFolders(pathToBuiltProject+"/res", fullPath+"/app/src/main/res", true, false);
+			if (Directory.Exists(pathToBuiltProject+"/aidl")) mergeFolders(pathToBuiltProject+"/aidl", fullPath+"/app/src/main/aidl", true, false);
+			if (!mergeMode) mergeFolders(pathToBuiltProject+"/src", fullPath+"/app/src/main/java", true, false);
+			mergeFolders(pathToBuiltProject+"/libs", fullPath+"/app/libs", false, false);
+			mergeFolders(pathToBuiltProject+"/libs/armeabi-v7a", fullPath+"/app/src/main/jniLibs/armeabi-v7a", false, false);
+			mergeFolders(pathToBuiltProject+"/libs/x86", fullPath+"/app/src/main/jniLibs/x86", false, false);
+
+			// get lib names
+			var libs = new List<string>();
+			var dir = new DirectoryInfo(pathToBuiltProject + "/libs");
+			foreach (var file in dir.GetFiles())
+			{
+				if ((file.Attributes & FileAttributes.Hidden) == 0 && (file.Attributes & FileAttributes.Directory) == 0 && file.Extension == ".jar")
+				{
+					libs.Add(file.Name);
+				}
+			}
+
+			// get android sdk target version
+			string androidSDKVersion;
+			using (var stream = new FileStream(pathToBuiltProject + "/project.properties", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var readerProp = new StreamReader(stream))
+			{
+				androidSDKVersion = readerProp.ReadLine().Replace("target=android-", "");
+			}
+
+			// generated app files >>>
+			// <<< read build.gradle file
+			if (!mergeMode)
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/app/build.gradle", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace(@"applicationId ""com.Company.AppName""", string.Format(@"applicationId ""{0}""", Application.bundleIdentifier));
+				value = value.Replace("compileSdkVersion ??", "compileSdkVersion " + androidSDKVersion);
+				value = value.Replace("targetSdkVersion ??", "targetSdkVersion " + androidSDKVersion);
+				value = value.Replace("minSdkVersion ??", "minSdkVersion " + (int)PlayerSettings.Android.minSdkVersion);
+				
+				using (var streamDst = new FileStream(fullPath + "/app/build.gradle", FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					// write build.gradle
+					writer.WriteLine(value);
+					writer.WriteLine(Environment.NewLine + "dependencies {");
+					foreach (var lib in libs) writer.WriteLine(string.Format("    compile files('libs/{0}')", lib));
+					writer.WriteLine("}");
+				}
+			}
+
+			// <<< read app.iml file
+			if (!mergeMode)
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/app/app.iml", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace("REIGN_OUT_FOLDER", mainPath);
+				value = value.Replace(@"<orderEntry type=""jdk"" jdkName=""Android API ?? Platform"" jdkType=""Android SDK"" />", string.Format(@"<orderEntry type=""jdk"" jdkName=""Android API {0} Platform"" jdkType=""Android SDK"" />", androidSDKVersion));
+
+				using (var streamDst = new FileStream(fullPath + "/app/app.iml", FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					string libValues = @"<orderEntry type=""sourceFolder"" forTests=""false"" />";
+					foreach (var lib in libs)
+					{
+						libValues += Environment.NewLine + string.Format(@"    <orderEntry type=""library"" exported="""" name=""{0}"" level=""project"" />", lib.Substring(0, lib.Length-4));
+					}
+
+					// write app.iml
+					writer.WriteLine(value.Replace(@"<orderEntry type=""sourceFolder"" forTests=""false"" />", libValues));
+				}
+			}
+
+			// copy proj files
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/gradle", fullPath+"/gradle", true, true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/copyright/profiles_settings.xml", fullPath+"/.idea/copyright/profiles_settings.xml", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/compiler.xml", fullPath+"/.idea/compiler.xml", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/encodings.xml", fullPath+"/.idea/encodings.xml", true);
+			if (!mergeMode) File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/gradle.xml", fullPath+"/.idea/gradle.xml", true);
+			if (!mergeMode) File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/runConfigurations.xml", fullPath+"/.idea/runConfigurations.xml", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/idea/vcs.xml", fullPath+"/.idea/vcs.xml", true);
+			if (!mergeMode) File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/build.gradle", fullPath+"/build.gradle", true);
+			if (!mergeMode) File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/settings.gradle", fullPath+"/settings.gradle", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/gradlew", fullPath+"/gradlew", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/gradlew.bat", fullPath+"/gradlew.bat", true);
+
+			// generated proj files >>>
+			// <<< read settings.iml file
+			if (!mergeMode)
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/settings.iml", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace("REIGN_OUT_FOLDER", mainPath);
+
+				using (var streamDst = new FileStream(fullPath + string.Format("/{0}.iml", mainPath), FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					// write settings.iml
+					writer.WriteLine(value);
+				}
+			}
+
+			// <<< read modules.xml file
+			if (!mergeMode)
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/idea/modules.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace("settings.iml", mainPath+".iml");
+
+				using (var streamDst = new FileStream(fullPath + "/.idea/modules.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					// write modules.xml
+					writer.WriteLine(value);
+				}
+			}
+
+			// <<< read misc.xml file
+			if (!mergeMode)
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/idea/misc.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace("Android API ?? Platform", string.Format("Android API {0} Platform", androidSDKVersion));
+
+				using (var streamDst = new FileStream(fullPath + "/.idea/misc.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					// write misc.xml
+					writer.WriteLine(value);
+				}
+			}
+			
+			// merge native java/res/libs files
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnative", fullPath+"/app/src/main/java/com/reignstudios/reignnative", true, true);
+			#if GOOGLEPLAY
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/GooglePlay/google-play-services.jar.file", fullPath+"/app/libs/google-play-services.jar", true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/aidl/GooglePlay", fullPath+"/app/src/main/aidl", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/example", fullPath+"/app/src/main/java/com/example", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativegoogleplay", fullPath+"/app/src/main/java/com/reignstudios/reignnativegoogleplay", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/GooglePlay", fullPath+"/app/src/main/res", true, true);
+			#elif AMAZON
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/amazon-ads-5.6.20.jar.file", fullPath+"/app/libs/amazon-ads-5.6.20.jar", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/AmazonInsights-android-sdk-2.1.26.jar.file", fullPath+"/app/libs/AmazonInsights-android-sdk-2.1.26.jar", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/gamecirclesdk.jar.file", fullPath+"/app/libs/gamecirclesdk.jar", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/in-app-purchasing-2.0.61.jar.file", fullPath+"/app/libs/in-app-purchasing-2.0.61.jar", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/login-with-amazon-sdk.jar.file", fullPath+"/app/libs/login-with-amazon-sdk.jar", true);
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/jniLibs/armeabi-v7a/libAmazonGamesJni.so.file", fullPath+"/app/src/main/jniLibs/armeabi-v7a/libAmazonGamesJni.so", true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativeamazon", fullPath+"/app/src/main/java/com/reignstudios/reignnativeamazon", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/Amazon", fullPath+"/app/src/main/res", true, true);
+			#elif SAMSUNG
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/aidl/Samsung", fullPath+"/app/src/main/aidl", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativesamsung", fullPath+"/app/src/main/java/com/reignstudios/reignnativesamsung", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/samsung", fullPath+"/app/src/main/java/com/samsung", true, true);
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/Samsung", fullPath+"/app/src/main/res", true, true);
+			replaceTextInFiles(fullPath+"/app/src/main/java/com/samsung", "import com.samsung.android.sdk.iap.lib.R;", string.Format("import {0}.R;", PlayerSettings.bundleIdentifier));
+			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/res/Samsung/values/strings.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var reader = new StreamReader(streamSrc))
+			{
+				string value = reader.ReadToEnd();
+				value = value.Replace("PRODUCT_NAME", PlayerSettings.productName);
+
+				using (var streamDst = new FileStream(fullPath + "/app/src/main/res/values/strings.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+				using (var writer = new StreamWriter(streamDst))
+				{
+					// write misc.xml
+					writer.WriteLine(value);
+				}
+			}
+			#endif
+
+			Debug.Log("Reign Android Studio output: " + fullPath);
+		}
+
+		private static void replaceTextInFiles(string path, string oldValue, string newValue)
+		{
+			var files = new List<string>();
+			gatherFilePaths(path, files, true);
+			foreach (var file in files)
+			{
+				if (Path.GetExtension(file) != ".java") continue;
+
+				string value = null;
+				using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read))
+				using (var reader = new StreamReader(stream))
+				{
+					value = reader.ReadToEnd();
+				}
+				
+				value = value.Replace(oldValue, newValue);
+				using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write))
+				using (var writer = new StreamWriter(stream))
+				{
+					writer.Write(value);
+				}
+			}
+		}
+
+		private static void mergeFolders(string src, string dst, bool recursive, bool ignoreMetaExt)
+		{
+			var files = new List<string>();
+			gatherFilePaths(src, files, recursive);
+			foreach (var file in files)
+			{
+				if (ignoreMetaExt && Path.GetExtension(file) == ".meta") continue;
+
+				string newDst = dst + file.Substring(src.Length);
+				Directory.CreateDirectory(Path.GetDirectoryName(newDst));
+				File.Copy(file, newDst, true);
+			}
+		}
 
 		#region PlatformTools
 		internal static void applyCompilerDirectives(bool append, params string[] directives)

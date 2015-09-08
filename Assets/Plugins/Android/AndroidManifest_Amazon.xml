@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Required and Leaderboards / Achievements -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+	<!-- Required for Amazon Ads -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+	<!-- Required for Amazon IAP Testing -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<application>
+		<!-- Amazon InAppPurchase receiver -->
+		<receiver android:name = "com.amazon.device.iap.ResponseReceiver" >
+			<intent-filter>
+				<action android:name = "com.amazon.inapp.purchasing.NOTIFY" android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY"/>
+			</intent-filter>
+		</receiver>
+
+		<!-- Amazon GameCircle -->
+		<activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface" android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
+		<activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface" android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
+		<activity android:name="com.amazon.identity.auth.device.authorization.AuthorizationActivity" android:theme="@android:style/Theme.NoDisplay" android:allowTaskReparenting="true" android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<!-- NOTE: Set "com.xxxx.xxxx" to your bundle/package id -->
+				<data android:host="com.xxxx.xxxx" android:scheme="amzn" />
+			</intent-filter>
+		</activity>
+		<receiver android:name="com.amazon.identity.auth.device.authorization.PackageIntentReceiver" android:enabled="true">
+			<intent-filter>
+				<action android:name="android.intent.action.PACKAGE_INSTALL" />
+				<action android:name="android.intent.action.PACKAGE_ADDED" />
+				<data android:scheme="package" />
+			</intent-filter>
+		</receiver>
+
+		<!-- Amazon Ads -->
+		<activity android:name="com.amazon.device.ads.AdActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+	</application>
+</manifest>
