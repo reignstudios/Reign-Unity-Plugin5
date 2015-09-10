@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<!-- Required and Leaderboards / Achievements -->
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-	<!-- Required for Amazon Ads -->
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-	<!-- Required for Amazon IAP Testing -->
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 	<application>
-		<!-- Amazon InAppPurchase receiver -->
-		<receiver android:name = "com.amazon.device.iap.ResponseReceiver" >
-			<intent-filter>
-				<action android:name = "com.amazon.inapp.purchasing.NOTIFY" android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY"/>
-			</intent-filter>
-		</receiver>
-
 		<!-- Amazon GameCircle -->
 		<activity android:name="com.amazon.ags.html5.overlay.GameCircleUserInterface" android:theme="@style/GCOverlay" android:hardwareAccelerated="false"></activity>
 		<activity android:name="com.amazon.ags.html5.overlay.GameCircleAlertUserInterface" android:theme="@style/GCAlert" android:hardwareAccelerated="false"></activity>
@@ -41,5 +23,23 @@
 
 		<!-- Amazon Ads -->
 		<activity android:name="com.amazon.device.ads.AdActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+		<!-- Amazon InAppPurchase receiver -->
+		<receiver android:name = "com.amazon.device.iap.ResponseReceiver" >
+			<intent-filter>
+				<action android:name = "com.amazon.inapp.purchasing.NOTIFY" android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY"/>
+			</intent-filter>
+		</receiver>
 	</application>
+
+	<!-- Required and Leaderboards / Achievements -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+	<!-- Required for Amazon Ads -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+	<!-- Required for Amazon IAP Testing -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

@@ -360,11 +360,17 @@ namespace Reign.EditorTools
     	}
 		#endregion
 
+		#if REIGN_TEST
 		[MenuItem("ReignTest/AndroidBuildTest")]
 		static void testAndroidBUILD()
 		{
+			#if UNITY_EDITOR_OSX
+			androidPostBuild(BuildTarget.Android, "/Users/andrew/Dev/Reign/Reign-Unity-Plugin5-Builds/Android/Reign Unity Plugin");
+			#else
 			androidPostBuild(BuildTarget.Android, @"C:\Users\zezba\Dev\Reign\Reign-Unity-Plugin5-Builds\Android\Reign Unity Plugin");
+			#endif
 		}
+		#endif
 
 		private static void androidPostBuild(BuildTarget target, string pathToBuiltProject)
 		{
@@ -434,7 +440,7 @@ namespace Reign.EditorTools
 			using (var reader = new StreamReader(streamSrc))
 			{
 				string value = reader.ReadToEnd();
-				value = value.Replace(@"applicationId ""com.Company.AppName""", string.Format(@"applicationId ""{0}""", Application.bundleIdentifier));
+				value = value.Replace(@"applicationId ""com.Company.AppName""", string.Format(@"applicationId ""{0}""", PlayerSettings.bundleIdentifier));
 				value = value.Replace("compileSdkVersion ??", "compileSdkVersion " + androidSDKVersion);
 				value = value.Replace("targetSdkVersion ??", "targetSdkVersion " + androidSDKVersion);
 				value = value.Replace("minSdkVersion ??", "minSdkVersion " + (int)PlayerSettings.Android.minSdkVersion);
@@ -446,6 +452,15 @@ namespace Reign.EditorTools
 					writer.WriteLine(value);
 					writer.WriteLine(Environment.NewLine + "dependencies {");
 					foreach (var lib in libs) writer.WriteLine(string.Format("    compile files('libs/{0}')", lib));
+					#if GOOGLEPLAY
+					writer.WriteLine("    compile files('libs/google-play-services.jar')");
+					#elif AMAZON
+					writer.WriteLine("    compile files('libs/amazon-ads-5.6.20.jar')");
+					writer.WriteLine("    compile files('libs/AmazonInsights-android-sdk-2.1.26.jar')");
+					writer.WriteLine("    compile files('libs/gamecirclesdk.jar')");
+					writer.WriteLine("    compile files('libs/in-app-purchasing-2.0.61.jar')");
+					writer.WriteLine("    compile files('libs/login-with-amazon-sdk.jar')");
+					#endif
 					writer.WriteLine("}");
 				}
 			}
