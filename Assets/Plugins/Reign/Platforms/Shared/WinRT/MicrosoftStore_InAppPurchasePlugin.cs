@@ -286,14 +286,47 @@ namespace Reign.Plugin
 		public async void GetProductInfo(InAppPurchaseGetProductInfoCallbackMethod callback)
 		{
 			if (callback == null) return;
-			var infos = new List<InAppPurchaseInfo>();
 
-			try
+			#if WINDOWS_PHONE
+			WinRTPlugin.Dispatcher.BeginInvoke(async delegate()
+			#else
+			await WinRTPlugin.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async delegate()
+			#endif
 			{
-				#if WINDOWS_PHONE
-				if (testing)
+				var infos = new List<InAppPurchaseInfo>();
+				try
 				{
-					var listingInfo = wp8TestListingInformation;
+					#if WINDOWS_PHONE
+					if (testing)
+					{
+						var listingInfo = wp8TestListingInformation;
+						foreach (var l in listingInfo.ProductListings)
+						{
+							var info = new InAppPurchaseInfo()
+							{
+								ID = l.Value.ProductId,
+								FormattedPrice = l.Value.FormattedPrice
+							};
+							infos.Add(info);
+						}
+					}
+					else
+					{
+						var listingInfo = await CurrentApp.LoadListingInformationAsync();
+						foreach (var l in listingInfo.ProductListings)
+						{
+							var info = new InAppPurchaseInfo()
+							{
+								ID = l.Value.ProductId,
+								FormattedPrice = l.Value.FormattedPrice
+							};
+							infos.Add(info);
+						}
+					}
+					#else
+					ListingInformation listingInfo;
+					if (testing) listingInfo = await CurrentAppSimulator.LoadListingInformationAsync();
+					else listingInfo = await CurrentApp.LoadListingInformationAsync();
 					foreach (var l in listingInfo.ProductListings)
 					{
 						var info = new InAppPurchaseInfo()
@@ -303,42 +336,16 @@ namespace Reign.Plugin
 						};
 						infos.Add(info);
 					}
-				}
-				else
-				{
-					var listingInfo = await CurrentApp.LoadListingInformationAsync();
-					foreach (var l in listingInfo.ProductListings)
-					{
-						var info = new InAppPurchaseInfo()
-						{
-							ID = l.Value.ProductId,
-							FormattedPrice = l.Value.FormattedPrice
-						};
-						infos.Add(info);
-					}
-				}
-				#else
-				ListingInformation listingInfo;
-				if (testing) listingInfo = await CurrentAppSimulator.LoadListingInformationAsync();
-				else listingInfo = await CurrentApp.LoadListingInformationAsync();
-				foreach (var l in listingInfo.ProductListings)
-				{
-					var info = new InAppPurchaseInfo()
-					{
-						ID = l.Value.ProductId,
-						FormattedPrice = l.Value.FormattedPrice
-					};
-					infos.Add(info);
-				}
-				#endif
+					#endif
 
-				callback(infos.ToArray(), true);
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e.Message);
-				callback(null, false);
-			}
+					callback(infos.ToArray(), true);
+				}
+				catch (Exception e)
+				{
+					Debug.LogError(e.Message);
+					callback(null, false);
+				}
+			});
 		}
 
 		public void Restore(InAppPurchaseRestoreCallbackMethod restoreCallback)

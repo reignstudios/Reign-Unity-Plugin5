@@ -125,6 +125,16 @@ namespace Reign.EditorTools
 		#endregion
 
 		#region PostBuildTools
+		static bool postProjectCompilerDirectiveExists(string value, XElement element)
+		{
+			foreach (var name in element.Value.Split(';', ' '))
+			{
+				if (name == value) return true;
+			}
+
+			return false;
+		}
+
 		static void addPostProjectCompilerDirectives(XDocument doc)
 		{
 			foreach (var element in doc.Root.Elements())
@@ -135,18 +145,19 @@ namespace Reign.EditorTools
 					if (subElement.Name.LocalName == "DefineConstants")
 					{
 						// make sure we need to add compiler directive
-						bool needToAdd = true;
-						foreach (var name in subElement.Value.Split(';', ' '))
-						{
-							if (name == "REIGN_POSTBUILD")
-							{
-								needToAdd = false;
-								break;
-							}
-						}
-
-						// add compiler directive
-						if (needToAdd) subElement.Value += ";REIGN_POSTBUILD";
+						if (!postProjectCompilerDirectiveExists("REIGN_POSTBUILD", subElement)) subElement.Value += ";REIGN_POSTBUILD";
+						#if WINRT_DISABLE_MS_ADS
+						if (!postProjectCompilerDirectiveExists("WINRT_DISABLE_MS_ADS", subElement)) subElement.Value += ";WINRT_DISABLE_MS_ADS";
+						#endif
+						#if WINRT_DISABLE_GOOGLE_ADS
+						if (!postProjectCompilerDirectiveExists("WINRT_DISABLE_GOOGLE_ADS", subElement)) subElement.Value += ";WINRT_DISABLE_GOOGLE_ADS";
+						#endif
+						#if WINRT_DISABLE_ADDUPLEX_ADS
+						if (!postProjectCompilerDirectiveExists("WINRT_DISABLE_ADDUPLEX_ADS", subElement)) subElement.Value += ";WINRT_DISABLE_ADDUPLEX_ADS";
+						#endif
+						#if WINRT_DISABLE_MS_IAP
+						if (!postProjectCompilerDirectiveExists("WINRT_DISABLE_MS_IAP", subElement)) subElement.Value += ";WINRT_DISABLE_MS_IAP";
+						#endif
 					}
 				}
 			}
@@ -177,16 +188,23 @@ namespace Reign.EditorTools
 					"Shared/WinRT/EmailPlugin.cs",
 					"Shared/WinRT/MarketingPlugin.cs",
 					"Shared/WinRT/MessageBoxPlugin.cs",
+					#if !WINRT_DISABLE_MS_ADS
 					"Shared/WinRT/MicrosoftAdvertising_AdPlugin.cs",
+					#endif
+					#if !WINRT_DISABLE_MS_IAP
 					"Shared/WinRT/MicrosoftStore_InAppPurchasePlugin.cs",
+					#endif
 					"Shared/WinRT/StreamPlugin.cs",
 					"Shared/WinRT/SocialPlugin.cs",
 					"Shared/WinRT/WinRTPlugin.cs",
 
 					#if UNITY_WP8
+					#if !WINRT_DISABLE_GOOGLE_ADS
 					"WP8/AdMob_AdPlugin.cs",
 					"WP8/AdMob_InterstitialAdPlugin.cs",
+					#endif
 
+					#if !WINRT_DISABLE_MS_IAP
 					"WP8/CurrentAppSimulator/CurrentApp.cs",
 					"WP8/CurrentAppSimulator/LicenseInformation.cs",
 					"WP8/CurrentAppSimulator/ListingInformation.cs",
@@ -195,7 +213,8 @@ namespace Reign.EditorTools
 					"WP8/CurrentAppSimulator/MockReceiptStore.cs",
 					"WP8/CurrentAppSimulator/ProductLicense.cs",
 					"WP8/CurrentAppSimulator/ProductListing.cs",
-					#else
+					#endif
+					#elif !WINRT_DISABLE_ADDUPLEX_ADS
 					"Shared/WinRT/AdDuplex_AdPlugin.cs",
 					"Shared/WinRT/AdDuplex_InterstitialAdPlugin.cs",
 					#endif
@@ -246,6 +265,10 @@ namespace Reign.EditorTools
 		[PostProcessBuild]
 		static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
 		{
+			#if DISABLE_REIGN
+			return;
+			#endif
+
 			if (target == BuildTarget.WSAPlayer || target == BuildTarget.WP8Player)
 			{
 				var productName = PlayerSettings.productName;
@@ -296,16 +319,24 @@ namespace Reign.EditorTools
 				proj.AddBuildProperty (targetID, "OTHER_LDFLAGS", "-ObjC");
 
 				// add frameworks
+				proj.AddFrameworkToProject(targetID, "MessageUI.framework", true);
+				#if !IOS_DISABLE_APPLE_IAP
+				proj.AddFrameworkToProject(targetID, "StoreKit.framework", true);
+				proj.AddFrameworkToProject(targetID, "Security.framework", true);
+				#endif
+				#if !IOS_DISABLE_APPLE_ADS
+				proj.AddFrameworkToProject(targetID, "iAd.framework", true);
+				#endif
+				#if !IOS_DISABLE_APPLE_SCORES
+				proj.AddFrameworkToProject(targetID, "GameKit.framework", true);
+				#endif
+				#if !IOS_DISABLE_GOOGLE_ADS
+				proj.AddFrameworkToProject(targetID, "GoogleMobileAds.framework", false);
 				proj.AddFrameworkToProject(targetID, "AdSupport.framework", true);
 				proj.AddFrameworkToProject(targetID, "CoreTelephony.framework", true);
 				proj.AddFrameworkToProject(targetID, "EventKit.framework", true);
 				proj.AddFrameworkToProject(targetID, "EventKitUI.framework", true);
-				proj.AddFrameworkToProject(targetID, "iAd.framework", true);
-				proj.AddFrameworkToProject(targetID, "MessageUI.framework", true);
-				proj.AddFrameworkToProject(targetID, "StoreKit.framework", true);
-				proj.AddFrameworkToProject(targetID, "Security.framework", true);
-				proj.AddFrameworkToProject(targetID, "GameKit.framework", true);
-				proj.AddFrameworkToProject(targetID, "GoogleMobileAds.framework", false);
+				#endif
 
 				// change GoogleMobileAds to use reletive path
 				string projData = proj.WriteToString();

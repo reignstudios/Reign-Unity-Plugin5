@@ -164,12 +164,16 @@ namespace Reign
 
 		private static void init_MicrosoftStore_InAppPurchasePlugin(MicrosoftStore_InAppPurchasePlugin_WinRT plugin, InAppPurchaseDesc desc, InAppPurchaseCreatedCallbackMethod createdCallback)
 		{
+			#if !WINRT_DISABLE_MS_IAP
 			plugin.Native = new MicrosoftStore_InAppPurchasePlugin_Native(desc, createdCallback);
+			#endif
 		}
 
 		private static void init_MicrosoftAdvertising_AdPlugin(MicrosoftAdvertising_AdPlugin_WinRT plugin, AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !WINRT_DISABLE_MS_ADS
 			plugin.Native = new MicrosoftAdvertising_AdPlugin_Native(desc, createdCallback);
+			#endif
 		}
 
 		#if UNITY_METRO
@@ -206,12 +210,16 @@ namespace Reign
 		#if WINDOWS_PHONE
 		private static void init_AdMob_AdPlugin(AdMob_AdPlugin_WP8 plugin, AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !WINRT_DISABLE_GOOGLE_ADS
 			plugin.Native = new AdMob_AdPlugin_Native(desc, createdCallback);
+			#endif
 		}
 
 		private static void init_AdMob_InterstitialAdPlugin(AdMob_InterstitialAdPlugin_WP8 plugin, InterstitialAdDesc desc, InterstitialAdCreatedCallbackMethod createdCallback)
 		{
+			#if !WINRT_DISABLE_GOOGLE_ADS
 			plugin.Native = new AdMob_InterstitialAdPlugin_Native(desc, createdCallback);
+			#endif
 		}
 		#endif
 	}
