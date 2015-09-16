@@ -9,7 +9,8 @@ namespace Reign.Plugin
 	{
 		private IntPtr native;
 		private InterstitialAdEventCallbackMethod eventCallback;
-		
+
+		#if !IOS_DISABLE_GOOGLE_ADS
 		[DllImport("__Internal", EntryPoint="AdMob_Interstitial_InitAd")]
 		private static extern IntPtr AdMob_Interstitial_InitAd(bool testing);
 		
@@ -30,9 +31,11 @@ namespace Reign.Plugin
 		
 		[DllImport("__Internal", EntryPoint="AdMob_Interstitial_Cache")]
 		private static extern void AdMob_Interstitial_Cache(IntPtr native);
+		#endif
 		
 		public AdMob_InterstitialAdPlugin_iOS (InterstitialAdDesc desc, InterstitialAdCreatedCallbackMethod callback)
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			bool pass = true;
 			try
 			{
@@ -48,6 +51,7 @@ namespace Reign.Plugin
 			}
 			
 			if (callback != null) callback(pass);
+			#endif
 		}
 		
 		~AdMob_InterstitialAdPlugin_iOS()
@@ -57,22 +61,29 @@ namespace Reign.Plugin
 
 		public void Dispose()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			AdMob_Interstitial_DisposeAd(native);
 			native = IntPtr.Zero;
+			#endif
 		}
 		
 		public void Cache()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			AdMob_Interstitial_Cache(native);
+			#endif
 		}
 		
 		public void Show()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			AdMob_Interstitial_Show(native);
+			#endif
 		}
 		
 		public void Update()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			if (eventCallback != null && AdMob_Interstitial_AdHasEvents(native))
 			{
 				IntPtr ptr = AdMob_Interstitial_GetNextAdEvent(native);
@@ -87,6 +98,7 @@ namespace Reign.Plugin
 					case "Error": eventCallback(InterstitialAdEvents.Error, values[1]); break;
 				}
 			}
+			#endif
 		}
 
 		public void OnGUI()

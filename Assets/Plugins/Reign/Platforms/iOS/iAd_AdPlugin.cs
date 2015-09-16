@@ -13,13 +13,16 @@ namespace Reign.Plugin
 			set
 			{
 				visible = value;
+				#if !IOS_DISABLE_APPLE_ADS
 				iAd_SetAdVisible(native, value);
+				#endif
 			}
 		}
 		
 		private IntPtr native;
 		private AdEventCallbackMethod eventCallback;
-		
+
+		#if !IOS_DISABLE_APPLE_ADS
 		[DllImport("__Internal", EntryPoint="iAd_InitAd")]
 		private static extern IntPtr iAd_InitAd(bool testing);
 		
@@ -40,9 +43,11 @@ namespace Reign.Plugin
 		
 		[DllImport("__Internal", EntryPoint="iAd_GetNextAdEvent")]
 		private static extern IntPtr iAd_GetNextAdEvent(IntPtr native);
+		#endif
 
 		public iAd_AdPlugin_iOS(AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !IOS_DISABLE_APPLE_ADS
 			eventCallback = desc.EventCallback;
 			native = iAd_InitAd(desc.Testing);
 			int gravity = convertGravity(desc.iOS_iAd_AdGravity);
@@ -50,6 +55,7 @@ namespace Reign.Plugin
 			iAd_CreateAd(native, gravity);
 			Visible = desc.Visible;
 			if (createdCallback != null) createdCallback(true);
+			#endif
 		}
 		
 		~iAd_AdPlugin_iOS()
@@ -59,8 +65,10 @@ namespace Reign.Plugin
 
 		public void Dispose()
 		{
+			#if !IOS_DISABLE_APPLE_ADS
 			iAd_DisposeAd(native);
 			native = IntPtr.Zero;
+			#endif
 		}
 		
 		private int convertGravity(AdGravity gravity)
@@ -82,8 +90,10 @@ namespace Reign.Plugin
 
 		public void SetGravity(AdGravity gravity)
 		{
+			#if !IOS_DISABLE_APPLE_ADS
 			int gravityIndex = convertGravity(gravity);
 			iAd_SetAdGravity(native, gravityIndex);
+			#endif
 		}
 		
 		public void Refresh()
@@ -93,6 +103,7 @@ namespace Reign.Plugin
 		
 		public void Update()
 		{
+			#if !IOS_DISABLE_APPLE_ADS
 			if (eventCallback != null && iAd_AdHasEvents(native))
 			{
 				IntPtr ptr = iAd_GetNextAdEvent(native);
@@ -105,6 +116,7 @@ namespace Reign.Plugin
 					case "Error": eventCallback(AdEvents.Error, values[1]); break;
 				}
 			}
+			#endif
 		}
 
 		public void OnGUI()

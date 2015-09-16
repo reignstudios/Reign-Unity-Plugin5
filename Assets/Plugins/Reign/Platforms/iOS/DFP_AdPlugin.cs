@@ -14,13 +14,16 @@ namespace Reign.Plugin
 			set
 			{
 				visible = value;
+				#if !IOS_DISABLE_GOOGLE_ADS
 				DFP_SetAdVisible(native, value);
+				#endif
 			}
 		}
 
 		private IntPtr native;
 		private AdEventCallbackMethod eventCallback;
 
+		#if !IOS_DISABLE_GOOGLE_ADS
 		[DllImport("__Internal", EntryPoint="DFP_InitAd")]
 		private static extern IntPtr DFP_InitAd(bool testing);
 
@@ -43,9 +46,11 @@ namespace Reign.Plugin
 
 		[DllImport("__Internal", EntryPoint="DFP_GetNextAdEvent")]
 		private static extern IntPtr DFP_GetNextAdEvent(IntPtr native);
+		#endif
 
 		public DFP_AdPlugin_iOS(AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			bool pass = true;
 			try
 			{
@@ -63,6 +68,7 @@ namespace Reign.Plugin
 			}
 
 			if (createdCallback != null) createdCallback(pass);
+			#endif
 		}
 
 		~DFP_AdPlugin_iOS()
@@ -72,8 +78,10 @@ namespace Reign.Plugin
 
 		public void Dispose()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			DFP_DisposeAd(native);
 			native = IntPtr.Zero;
+			#endif
 		}
 
 		private int convertAdSize(iOS_DFP_AdSize adSize)
@@ -110,17 +118,22 @@ namespace Reign.Plugin
 
 		public void SetGravity(AdGravity gravity)
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			int gravityIndex = convertGravity(gravity);
 			DFP_SetAdGravity(native, gravityIndex);
+			#endif
 		}
 
 		public void Refresh()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			DFP_Refresh(native);
+			#endif
 		}
 
 		public void Update()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			if (eventCallback != null && DFP_AdHasEvents(native))
 			{
 				IntPtr ptr = DFP_GetNextAdEvent(native);
@@ -133,6 +146,7 @@ namespace Reign.Plugin
 					case "Error": eventCallback(AdEvents.Error, values[1]); break;
 				}
 			}
+			#endif
 		}
 
 		public void OnGUI()

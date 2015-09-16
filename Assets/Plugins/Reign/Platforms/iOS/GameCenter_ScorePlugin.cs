@@ -20,6 +20,7 @@ namespace Reign.Plugin
 		private RequestAchievementsCallbackMethod requestAchievementsCallback;
 		private ResetUserAchievementsCallbackMethod resetUserAchievementsCallback;
 
+		#if !IOS_DISABLE_APPLE_SCORES
 		[DllImport("__Internal", EntryPoint="InitGameCenter")]
 		private static extern void InitGameCenter();
 
@@ -91,9 +92,11 @@ namespace Reign.Plugin
 
 		[DllImport("__Internal", EntryPoint="GameCenterResetUserAchievementsSucceeded")]
 		private static extern bool GameCenterResetUserAchievementsSucceeded();
+		#endif
 
 		public GameCenter_ScorePlugin_iOS (ScoreDesc desc, CreatedScoreAPICallbackMethod callback)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			this.desc = desc;
 
 			try
@@ -108,13 +111,16 @@ namespace Reign.Plugin
 			}
 
 			if (callback != null) callback(true, null);
+			#endif
 		}
 
 		public void Authenticate (AuthenticateCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			authenticateCallback = callback;
 			waitingToAuthenticate = true;
 			AuthenticateGameCenter();
+			#endif
 		}
 
 		public void Logout ()
@@ -154,6 +160,7 @@ namespace Reign.Plugin
 
 		public void ReportAchievement (string achievementID, float percentComplete, ReportAchievementCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			// find achievement desc
 			AchievementDesc found = null;
 			foreach (var a in desc.AchievementDescs)
@@ -171,18 +178,23 @@ namespace Reign.Plugin
 			// request
 			reportAchievementCallback = callback;
 			GameCenterReportAchievement(findNativeAchievementID(achievementID), (percentComplete / found.PercentCompletedAtValue) * 100f);
+			#endif
 		}
 
 		public void ReportScore (string leaderboardID, long score, ReportScoreCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			reportScoreCallback = callback;
 			GameCenterReportScore(score, findNativeLoaderboardID(leaderboardID));
+			#endif
 		}
 
 		public void RequestAchievements (RequestAchievementsCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			requestAchievementsCallback = callback;
 			GameCenterRequestAchievements();
+			#endif
 		}
 
 		public void RequestScores (string leaderboardID, int offset, int range, RequestScoresCallbackMethod callback, MonoBehaviour services)
@@ -192,6 +204,7 @@ namespace Reign.Plugin
 
 		public void ShowNativeAchievementsPage (ShowNativeViewDoneCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			if (IsAuthenticated)
 			{
 				GameCeneterShowAchievementsPage();
@@ -201,10 +214,12 @@ namespace Reign.Plugin
 			{
 				if (callback != null) callback(false, "Not Authenticated!");
 			}
+			#endif
 		}
 
 		public void ShowNativeScoresPage (string leaderboardID, ShowNativeViewDoneCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			if (IsAuthenticated)
 			{
 				GameCenterShowScoresPage(findNativeLoaderboardID(leaderboardID));
@@ -214,10 +229,12 @@ namespace Reign.Plugin
 			{
 				if (callback != null) callback(false, "Not Authenticated!");
 			}
+			#endif
 		}
 
 		public void ResetUserAchievementsProgress(ResetUserAchievementsCallbackMethod callback, MonoBehaviour services)
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			if (IsAuthenticated)
 			{
 				resetUserAchievementsCallback = callback;
@@ -227,10 +244,12 @@ namespace Reign.Plugin
 			{
 				if (callback != null) callback(false, "Not Authenticated!");
 			}
+			#endif
 		}
 
 		public void Update ()
 		{
+			#if !IOS_DISABLE_APPLE_SCORES
 			// authenticate
 			if (waitingToAuthenticate && GameCenterCheckAuthenticateDone())
 			{
@@ -321,6 +340,7 @@ namespace Reign.Plugin
 			{
 				resetUserAchievementsCallback(GameCenterResetUserAchievementsSucceeded(), "Unknown");
 			}
+			#endif
 		}
 	}
 }

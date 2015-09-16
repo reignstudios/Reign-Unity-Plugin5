@@ -14,13 +14,16 @@ namespace Reign.Plugin
 			set
 			{
 				visible = value;
+				#if !IOS_DISABLE_GOOGLE_ADS
 				AdMob_SetAdVisible(native, value);
+				#endif
 			}
 		}
 		
 		private IntPtr native;
 		private AdEventCallbackMethod eventCallback;
-		
+
+		#if !IOS_DISABLE_GOOGLE_ADS
 		[DllImport("__Internal", EntryPoint="AdMob_InitAd")]
 		private static extern IntPtr AdMob_InitAd(bool testing);
 		
@@ -43,9 +46,11 @@ namespace Reign.Plugin
 		
 		[DllImport("__Internal", EntryPoint="AdMob_GetNextAdEvent")]
 		private static extern IntPtr AdMob_GetNextAdEvent(IntPtr native);
+		#endif
 
 		public AdMob_AdPlugin_iOS(AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			bool pass = true;
 			try
 			{
@@ -63,6 +68,7 @@ namespace Reign.Plugin
 			}
 				
 			if (createdCallback != null) createdCallback(pass);
+			#endif
 		}
 		
 		~AdMob_AdPlugin_iOS()
@@ -72,8 +78,10 @@ namespace Reign.Plugin
 
 		public void Dispose()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			AdMob_DisposeAd(native);
 			native = IntPtr.Zero;
+			#endif
 		}
 		
 		private int convertAdSize(iOS_AdMob_AdSize adSize)
@@ -110,17 +118,22 @@ namespace Reign.Plugin
 
 		public void SetGravity(AdGravity gravity)
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			int gravityIndex = convertGravity(gravity);
 			AdMob_SetAdGravity(native, gravityIndex);
+			#endif
 		}
 		
 		public void Refresh()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			AdMob_Refresh(native);
+			#endif
 		}
 		
 		public void Update()
 		{
+			#if !IOS_DISABLE_GOOGLE_ADS
 			if (eventCallback != null && AdMob_AdHasEvents(native))
 			{
 				IntPtr ptr = AdMob_GetNextAdEvent(native);
@@ -133,6 +146,7 @@ namespace Reign.Plugin
 					case "Error": eventCallback(AdEvents.Error, values[1]); break;
 				}
 			}
+			#endif
 		}
 
 		public void OnGUI()

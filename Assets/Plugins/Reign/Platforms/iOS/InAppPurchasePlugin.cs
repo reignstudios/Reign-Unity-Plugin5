@@ -15,7 +15,8 @@ namespace Reign.Plugin
 		private IntPtr native;
 		private InAppPurchaseRestoreCallbackMethod restoreCallback;
 		private InAppPurchaseBuyCallbackMethod purchasedCallback;
-		
+
+		#if !IOS_DISABLE_APPLE_IAP
 		[DllImport("__Internal", EntryPoint="InitInAppPurchase")]
 		private static extern IntPtr InitInAppPurchase(bool testing, string sharedSecretKey);
 		
@@ -48,9 +49,11 @@ namespace Reign.Plugin
 
 		[DllImport("__Internal", EntryPoint="GetInAppPurchaseProductInfo")]
 		private unsafe static extern byte** GetInAppPurchaseProductInfo(IntPtr native);
+		#endif
 
 		public AppleStore_InAppPurchasePlugin_iOS(InAppPurchaseDesc desc, InAppPurchaseCreatedCallbackMethod callback)
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			bool pass = true;
 			try
 			{
@@ -81,16 +84,20 @@ namespace Reign.Plugin
 			}
 			
 			if (callback != null) callback(pass);
+			#endif
 		}
 		
 		~AppleStore_InAppPurchasePlugin_iOS()
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			DisposeInAppPurchase(native);
 			native = IntPtr.Zero;
+			#endif
 		}
 
 		public unsafe void GetProductInfo (InAppPurchaseGetProductInfoCallbackMethod callback)
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			if (callback == null) return;
 
 			byte** ptr = GetInAppPurchaseProductInfo(native);
@@ -118,24 +125,30 @@ namespace Reign.Plugin
 			}
 
 			callback(products.ToArray(), true);
+			#endif
 		}
 
 		public void Restore(InAppPurchaseRestoreCallbackMethod restoreCallback)
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			if (restoreCallback == null) return;
 			
 			this.restoreCallback = restoreCallback;
 			RestoreInAppPurchase(native);
+			#endif
 		}
 
 		public void BuyInApp(string inAppID, InAppPurchaseBuyCallbackMethod purchasedCallback)
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			this.purchasedCallback = purchasedCallback;
 			BuyInAppPurchase(native, inAppID);
+			#endif
 		}
 		
 		public void Update()
 		{
+			#if !IOS_DISABLE_APPLE_IAP
 			if (CheckRestoreInAppPurchaseStatus(native))
 			{
 				var ids = new List<string>();
@@ -191,6 +204,7 @@ namespace Reign.Plugin
 					purchasedCallback(id, receipt, succeeded);
 				}
 			}
+			#endif
 		}
 	}
 }

@@ -315,8 +315,10 @@ namespace Reign.EditorTools
 				string targetID = proj.TargetGuidByName ("Unity-iPhone");
 
 				// set custom link flags
+				#if !IOS_DISABLE_GOOGLE_ADS
 				proj.AddBuildProperty (targetID, "OTHER_LDFLAGS", "-all_load");
 				proj.AddBuildProperty (targetID, "OTHER_LDFLAGS", "-ObjC");
+				#endif
 
 				// add frameworks
 				proj.AddFrameworkToProject(targetID, "MessageUI.framework", true);
@@ -338,8 +340,9 @@ namespace Reign.EditorTools
 				proj.AddFrameworkToProject(targetID, "EventKitUI.framework", true);
 				#endif
 
-				// change GoogleMobileAds to use reletive path
 				string projData = proj.WriteToString();
+				#if !IOS_DISABLE_GOOGLE_ADS
+				// change GoogleMobileAds to use reletive path
 				projData = projData.Replace
 				(
 					@"/* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = System/Library/Frameworks/GoogleMobileAds.framework; sourceTree = SDKROOT; };",
@@ -353,10 +356,12 @@ namespace Reign.EditorTools
 					@"FRAMEWORK_SEARCH_PATHS = ""$(inherited)"";",
 					@"FRAMEWORK_SEARCH_PATHS = (""$(inherited)"", ""$(PROJECT_DIR)/Frameworks"",);"
 				);
+				#endif
 
 				// save proj data
 				File.WriteAllText(projPath, projData);
 
+				#if !IOS_DISABLE_GOOGLE_ADS
 				// create Frameworks folder if one doesn't exists
 				if (!Directory.Exists(pathToBuiltProject+"/Frameworks/")) Directory.CreateDirectory(pathToBuiltProject+"/Frameworks/");
 
@@ -375,6 +380,7 @@ namespace Reign.EditorTools
 						if (exitCode != 0) Debug.LogError("Failed to unzip GoogleMobileAds.framework.zip with ErrorCode: " + exitCode);
 					}
 				}
+				#endif
 			}
 			#endif
 			else if (target == BuildTarget.Android)
