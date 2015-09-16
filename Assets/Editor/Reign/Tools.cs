@@ -483,14 +483,20 @@ namespace Reign.EditorTools
 					writer.WriteLine(value);
 					writer.WriteLine(Environment.NewLine + "dependencies {");
 					foreach (var lib in libs) writer.WriteLine(string.Format("    compile files('libs/{0}')", lib));
-					#if GOOGLEPLAY
+					#if GOOGLEPLAY && !ANDROID_DISABLE_GOOGLEPLAY
 					writer.WriteLine("    compile files('libs/google-play-services.jar')");
-					#elif AMAZON
+					#elif AMAZON && !ANDROID_DISABLE_AMAZON
+					#if !ANDROID_DISABLE_AMAZON_ADS
 					writer.WriteLine("    compile files('libs/amazon-ads-5.6.20.jar')");
+					#endif
+					#if !ANDROID_DISABLE_AMAZON_SCORES
 					writer.WriteLine("    compile files('libs/AmazonInsights-android-sdk-2.1.26.jar')");
 					writer.WriteLine("    compile files('libs/gamecirclesdk.jar')");
-					writer.WriteLine("    compile files('libs/in-app-purchasing-2.0.61.jar')");
 					writer.WriteLine("    compile files('libs/login-with-amazon-sdk.jar')");
+					#endif
+					#if !ANDROID_DISABLE_AMAZON_IAP
+					writer.WriteLine("    compile files('libs/in-app-purchasing-2.0.61.jar')");
+					#endif
 					#endif
 					writer.WriteLine("}");
 				}
@@ -583,27 +589,44 @@ namespace Reign.EditorTools
 			
 			// merge native java/res/libs files
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnative", fullPath+"/app/src/main/java/com/reignstudios/reignnative", true, true);
-			#if GOOGLEPLAY
+			#if GOOGLEPLAY && !ANDROID_DISABLE_GOOGLEPLAY
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/GooglePlay/google-play-services.jar.file", fullPath+"/app/libs/google-play-services.jar", true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/aidl/GooglePlay", fullPath+"/app/src/main/aidl", true, true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/example", fullPath+"/app/src/main/java/com/example", true, true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativegoogleplay", fullPath+"/app/src/main/java/com/reignstudios/reignnativegoogleplay", true, true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/GooglePlay", fullPath+"/app/src/main/res", true, true);
-			#elif AMAZON
+			#elif AMAZON && !ANDROID_DISABLE_AMAZON
+			var ignoredJavaFiles = new List<string>();
+			#if !ANDROID_DISABLE_AMAZON_ADS
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/amazon-ads-5.6.20.jar.file", fullPath+"/app/libs/amazon-ads-5.6.20.jar", true);
+			#else
+			ignoredJavaFiles.Add("Amazon_AdsNative.java");
+			ignoredJavaFiles.Add("Amazon_InterstitialAdNative.java");
+			#endif
+			#if !ANDROID_DISABLE_AMAZON_SCORES
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/AmazonInsights-android-sdk-2.1.26.jar.file", fullPath+"/app/libs/AmazonInsights-android-sdk-2.1.26.jar", true);
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/gamecirclesdk.jar.file", fullPath+"/app/libs/gamecirclesdk.jar", true);
-			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/in-app-purchasing-2.0.61.jar.file", fullPath+"/app/libs/in-app-purchasing-2.0.61.jar", true);
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/login-with-amazon-sdk.jar.file", fullPath+"/app/libs/login-with-amazon-sdk.jar", true);
 			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/jniLibs/armeabi-v7a/libAmazonGamesJni.so.file", fullPath+"/app/src/main/jniLibs/armeabi-v7a/libAmazonGamesJni.so", true);
-			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativeamazon", fullPath+"/app/src/main/java/com/reignstudios/reignnativeamazon", true, true);
+			#else
+			ignoredJavaFiles.Add("Amazon_GameCircle_LeaderboardsAchievements.java");
+			#endif
+			#if !ANDROID_DISABLE_AMAZON_IAP
+			File.Copy(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/libs/Amazon/in-app-purchasing-2.0.61.jar.file", fullPath+"/app/libs/in-app-purchasing-2.0.61.jar", true);
+			#else
+			ignoredJavaFiles.Add("Amazon_InAppPurchaseNative.java");
+			#endif
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativeamazon", fullPath+"/app/src/main/java/com/reignstudios/reignnativeamazon", true, true, ignoredJavaFiles.ToArray());
+			#if !ANDROID_DISABLE_AMAZON_SCORES
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/Amazon", fullPath+"/app/src/main/res", true, true);
-			#elif SAMSUNG
+			#endif
+			#elif SAMSUNG && !ANDROID_DISABLE_SAMSUNG
+			var ignoredJavaFiles = new List<string>();
+			#if !ANDROID_DISABLE_SAMSUNG_IAP
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/aidl/Samsung", fullPath+"/app/src/main/aidl", true, true);
-			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativesamsung", fullPath+"/app/src/main/java/com/reignstudios/reignnativesamsung", true, true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/samsung", fullPath+"/app/src/main/java/com/samsung", true, true);
 			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/res/Samsung", fullPath+"/app/src/main/res", true, true);
-			replaceTextInFiles(fullPath+"/app/src/main/java/com/samsung", "import com.samsung.android.sdk.iap.lib.R;", string.Format("import {0}.R;", PlayerSettings.bundleIdentifier));
+			replaceTextInJavaFiles(fullPath+"/app/src/main/java/com/samsung", "import com.samsung.android.sdk.iap.lib.R;", string.Format("import {0}.R;", PlayerSettings.bundleIdentifier));
 			using (var streamSrc = new FileStream(Application.dataPath + "/Plugins/Android/ReignPostBuildResources/res/Samsung/values/strings.xml", FileMode.Open, FileAccess.Read, FileShare.None))
 			using (var reader = new StreamReader(streamSrc))
 			{
@@ -617,12 +640,16 @@ namespace Reign.EditorTools
 					writer.WriteLine(value);
 				}
 			}
+			#else
+			ignoredJavaFiles.Add("Samsung_InAppPurchaseNative.java");
+			#endif
+			mergeFolders(Application.dataPath+"/Plugins/Android/ReignPostBuildResources/java/com/reignstudios/reignnativesamsung", fullPath+"/app/src/main/java/com/reignstudios/reignnativesamsung", true, true, ignoredJavaFiles.ToArray());
 			#endif
 
 			Debug.Log("Reign Android Studio output: " + fullPath);
 		}
 
-		private static void replaceTextInFiles(string path, string oldValue, string newValue)
+		private static void replaceTextInJavaFiles(string path, string oldValue, string newValue)
 		{
 			var files = new List<string>();
 			gatherFilePaths(path, files, true);
@@ -648,11 +675,32 @@ namespace Reign.EditorTools
 
 		private static void mergeFolders(string src, string dst, bool recursive, bool ignoreMetaExt)
 		{
+			mergeFolders(src, dst, recursive, ignoreMetaExt, null);
+		}
+
+		private static void mergeFolders(string src, string dst, bool recursive, bool ignoreMetaExt, string[] ignoredFiles)
+		{
 			var files = new List<string>();
 			gatherFilePaths(src, files, recursive);
 			foreach (var file in files)
 			{
 				if (ignoreMetaExt && Path.GetExtension(file) == ".meta") continue;
+
+				if (ignoredFiles != null)
+				{
+					string name = Path.GetFileName(file);
+					bool skip = false;
+					foreach (var ignore in ignoredFiles)
+					{
+						if (ignore == name)
+						{
+							skip = true;
+							break;
+						}
+					}
+
+					if (skip) continue;
+				}
 
 				string newDst = dst + file.Substring(src.Length);
 				Directory.CreateDirectory(Path.GetDirectoryName(newDst));

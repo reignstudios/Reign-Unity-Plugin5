@@ -179,7 +179,9 @@ namespace Reign
 		#if UNITY_METRO
 		private static void init_AdDuplex_AdPlugin(AdDuplex_AdPlugin_WinRT plugin, AdDesc desc, AdCreatedCallbackMethod createdCallback)
 		{
+			#if !WINRT_DISABLE_ADDUPLEX_ADS
 			plugin.Native = new AdDuplex_AdPlugin_Native(desc, createdCallback);
+			#endif
 		}
 
 		private static void init_AdDuplex_InterstitialAdPlugin(AdDuplex_InterstitialAdPlugin_WinRT plugin, InterstitialAdDesc desc, InterstitialAdCreatedCallbackMethod createdCallback)
