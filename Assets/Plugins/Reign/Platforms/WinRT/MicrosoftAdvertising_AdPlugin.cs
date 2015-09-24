@@ -218,7 +218,10 @@ namespace Reign.Plugin
 					Debug.LogError(e.Message);
 				}
 
-				if (createdCallback != null) createdCallback(pass);
+				UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+				{
+					if (createdCallback != null) createdCallback(pass);
+				}, false);
 			});
 		}
 
@@ -237,44 +240,44 @@ namespace Reign.Plugin
 		#if WINDOWS_PHONE
 		void adControl_IsEngagedChanged(object sender, EventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (adControl.IsEngaged && eventCallback != null) eventCallback(AdEvents.Clicked, null);
-			});
+			}, false);
 		}
 
 		void adControl_AdRefreshed(object sender, EventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(AdEvents.Refreshed, null);
-			});
+			}, false);
 		}
 		#else
 		void adControl_IsEngagedChanged(object sender, RoutedEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (adControl.IsEngaged && eventCallback != null) eventCallback(AdEvents.Clicked, null);
-			});
+			}, false);
 		}
 
 		void adControl_AdRefreshed(object sender, RoutedEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(AdEvents.Refreshed, null);
-			});
+			}, false);
 		}
 		#endif
 
 		void adControl_ErrorOccurred(object sender, AdErrorEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				Debug.LogError(e.Error.Message);
 				if (eventCallback != null) eventCallback(AdEvents.Error, e.Error.Message);
-			});
+			}, false);
 		}
 
 		public void Dispose()

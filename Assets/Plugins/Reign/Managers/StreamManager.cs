@@ -2,11 +2,6 @@
 //  Created by Andrew Witte.
 // -------------------------------------------------------
 
-//#define TEST_ASYNC
-#if (UNITY_WINRT && !UNITY_EDITOR) || TEST_ASYNC
-#define ASYNC
-#endif
-
 using System;
 using System.IO;
 using UnityEngine;
@@ -96,58 +91,26 @@ namespace Reign
 
 		private static void async_streamExistsCallback(bool exists)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				checkingIfFileExists = false;
-				if (streamExistsCallback != null) streamExistsCallback(exists);
-			});
-			#else
 			checkingIfFileExists = false;
 			if (streamExistsCallback != null) streamExistsCallback(exists);
-			#endif
 		}
 
 		private static void async_streamDeleteCallback(bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				deletingFile = false;
-				if (streamDeleteCallback != null) streamDeleteCallback(succeeded);
-			});
-			#else
 			deletingFile = false;
 			if (streamDeleteCallback != null) streamDeleteCallback(succeeded);
-			#endif
 		}
 		
 		private static void async_streamSavedCallback(bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				savingStream = false;
-				if (streamSavedCallback != null) streamSavedCallback(succeeded);
-			});
-			#else
 			savingStream = false;
 			if (streamSavedCallback != null) streamSavedCallback(succeeded);
-			#endif
 		}
 		
 		private static void async_streamLoadedCallback(Stream stream, bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				loadingStream = false;
-				if (streamLoadedCallback != null) streamLoadedCallback(stream, succeeded);
-			});
-			#else
 			loadingStream = false;
 			if (streamLoadedCallback != null) streamLoadedCallback(stream, succeeded);
-			#endif
 		}
 
 		private static void updateQues()

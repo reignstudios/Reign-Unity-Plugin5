@@ -298,12 +298,18 @@ namespace Reign.Plugin
 					using (var fileStream = await file.OpenStreamForWriteAsync())
 					{
 						fileStream.Write(data, 0, data.Length);
-						if (streamSavedCallback != null) streamSavedCallback(true);
+						UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+						{
+							if (streamSavedCallback != null) streamSavedCallback(true);
+						}, false);
 					}
 				}
 				else
 				{
-					if (streamSavedCallback != null) streamSavedCallback(false);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						if (streamSavedCallback != null) streamSavedCallback(false);
+					}, false);
 				}
 			});
 		}
@@ -380,7 +386,10 @@ namespace Reign.Plugin
 		{
 			if (data == null)
 			{
-				LoadFileDialog_streamLoadedCallback(null, false);
+				UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+				{
+					LoadFileDialog_streamLoadedCallback(null, false);
+				}, false);
 				return;
 			}
 
@@ -392,7 +401,10 @@ namespace Reign.Plugin
 				if (LoadFileDialog_maxWidth == 0 || LoadFileDialog_maxHeight == 0)
 				{
 					stream = await file.OpenStreamForReadAsync();
-					LoadFileDialog_streamLoadedCallback(stream, true);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						LoadFileDialog_streamLoadedCallback(stream, true);
+					}, false);
 				}
 				else
 				{
@@ -401,12 +413,18 @@ namespace Reign.Plugin
 						stream = await resizeImageStream(tempStream.AsRandomAccessStream(), LoadFileDialog_maxWidth, LoadFileDialog_maxHeight);
 					}
 
-					LoadFileDialog_streamLoadedCallback(stream, true);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						LoadFileDialog_streamLoadedCallback(stream, true);
+					}, false);
 				}
 			}
 			else
 			{
-				LoadFileDialog_streamLoadedCallback(null, false);
+				UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+				{
+					LoadFileDialog_streamLoadedCallback(null, false);
+				}, false);
 			}
 
 			LoadFileDialog_picker = null;
@@ -465,7 +483,10 @@ namespace Reign.Plugin
 						if (maxWidth == 0 || maxHeight == 0)
 						{
 							stream = await file.OpenStreamForReadAsync();
-							streamLoadedCallback(stream, true);
+							UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+							{
+								streamLoadedCallback(stream, true);
+							}, false);
 						}
 						else
 						{
@@ -483,13 +504,19 @@ namespace Reign.Plugin
 								#endif
 							}
 
-							streamLoadedCallback(stream, true);
+							UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+							{
+								streamLoadedCallback(stream, true);
+							}, false);
 							#endif
 						}
 					}
 					else
 					{
-						streamLoadedCallback(null, false);
+						UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+						{
+							streamLoadedCallback(null, false);
+						}, false);
 					}
 					#endif
 				}
@@ -497,7 +524,10 @@ namespace Reign.Plugin
 				{
 					if (stream != null) stream.Dispose();
 					Debug.LogError(e.Message);
-					streamLoadedCallback(null, false);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						streamLoadedCallback(null, false);
+					}, false);
 				}
 			});
 		}
@@ -599,24 +629,36 @@ namespace Reign.Plugin
 						{
 							if (maxWidth == 0 || maxHeight == 0)
 							{
-								streamLoadedCallback(cameraStream.AsStream(), true);
+								UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+								{
+									streamLoadedCallback(cameraStream.AsStream(), true);
+								}, false);
 							}
 							else
 							{
 								var stream = await resizeImageStream(cameraStream, maxWidth, maxHeight);
-								streamLoadedCallback(stream, true);
+								UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+								{
+									streamLoadedCallback(stream, true);
+								}, false);
 							}
 						}
 					}
 					else
 					{
-						streamLoadedCallback(null, false);
+						UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+						{
+							streamLoadedCallback(null, false);
+						}, false);
 					}
 				}
 				catch (Exception e)
 				{
 					Debug.LogError(e.Message);
-					streamLoadedCallback(null, false);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						streamLoadedCallback(null, false);
+					}, false);
 				}
 			});
 			#endif

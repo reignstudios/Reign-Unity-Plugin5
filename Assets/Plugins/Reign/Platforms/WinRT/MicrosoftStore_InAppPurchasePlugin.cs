@@ -338,12 +338,18 @@ namespace Reign.Plugin
 					}
 					#endif
 
-					callback(infos.ToArray(), true);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						callback(infos.ToArray(), true);
+					}, false);
 				}
 				catch (Exception e)
 				{
 					Debug.LogError(e.Message);
-					callback(null, false);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						callback(null, false);
+					}, false);
 				}
 			});
 		}
@@ -379,7 +385,10 @@ namespace Reign.Plugin
 						restoreCallback(inAppID.ID, licenseInformation.ProductLicenses[inAppID.ID].IsActive && !licenseInformation.ProductLicenses[inAppID.ID].IsConsumable);
 					}
 					#else
-					restoreCallback(inAppID.ID, licenseInformation.ProductLicenses[inAppID.ID].IsActive && inAppID.Type != InAppPurchaseTypes.Consumable);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						restoreCallback(inAppID.ID, licenseInformation.ProductLicenses[inAppID.ID].IsActive && inAppID.Type != InAppPurchaseTypes.Consumable);
+					}, false);
 					#endif
 				}
 			});
@@ -486,7 +495,10 @@ namespace Reign.Plugin
 								Debug.LogError("NOTE: Consumable IAP not supported in 8.0");
 							}
 							#else
-							purchasedCallback(inAppID, receipt, results.Status == ProductPurchaseStatus.Succeeded || results.Status == ProductPurchaseStatus.AlreadyPurchased || licenseInformation.ProductLicenses[inAppID].IsActive);
+							UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+							{
+								purchasedCallback(inAppID, receipt, results.Status == ProductPurchaseStatus.Succeeded || results.Status == ProductPurchaseStatus.AlreadyPurchased || licenseInformation.ProductLicenses[inAppID].IsActive);
+							}, false);
 							if (isConsumbable(inAppID))
 							{
 								if (testing) await CurrentAppSimulator.ReportConsumableFulfillmentAsync(productID, results.TransactionId);
@@ -498,12 +510,18 @@ namespace Reign.Plugin
 					catch (Exception e)
 					{
 						Debug.LogError(e.Message);
-						if (purchasedCallback != null) purchasedCallback(inAppID, null, false);
+						UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+						{
+							if (purchasedCallback != null) purchasedCallback(inAppID, null, false);
+						}, false);
 					}
 				}
 				else
 				{
-					if (purchasedCallback != null) purchasedCallback(inAppID, null, true);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						if (purchasedCallback != null) purchasedCallback(inAppID, null, true);
+					}, false);
 				}
 			});
 		}

@@ -143,52 +143,55 @@ namespace Reign.Plugin
 					Debug.LogError(e.Message);
 				}
 
-				if (createdCallback != null) createdCallback(pass);
+				UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+				{
+					if (createdCallback != null) createdCallback(pass);
+				}, false);
 			});
 		}
 
 		void adControl_Clicked(object sender, AdClickEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(AdEvents.Clicked, null);
-			});
+			}, false);
 		}
 
 		void adControl_AdRefreshed(object sender, AdLoadedEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(AdEvents.Refreshed, null);
-			});
+			}, false);
 		}
 
 		void adControl_ErrorOccurred(object sender, AdLoadingErrorEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				Debug.LogError(e.Error.Message);
 				if (eventCallback != null) eventCallback(AdEvents.Error, e.Error.Message);
-			});
+			}, false);
 		}
 
 		private void adControl_NoAd(object sender, NoAdEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				Debug.LogError(e.Message);
 				if (eventCallback != null) eventCallback(AdEvents.Error, e.Message);
-			});
+			}, false);
 		}
 
 		private void adControl_AdCovered(object sender, AdCoveredEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				string error = "Overlapping XAML object: " + e.CulpritElement.Name;
 				Debug.LogError(error);
 				if (eventCallback != null) eventCallback(AdEvents.Error, error);
-			});
+			}, false);
 		}
 
 		public void Dispose()

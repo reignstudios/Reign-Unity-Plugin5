@@ -45,7 +45,7 @@ public class InterstitialAdDemo : MonoBehaviour
 
 		// WP8 (Windows Phone 8.0 & 8.1)
 		desc.WP8_AdAPI = InterstitialAdAPIs.AdMob;// NOTE: If building for WP 8.1 or Universal targets this value is NOT used (Use the WinRT value instead). All other WP8 values are still used for WP 8.0, 8.1 and Universal.
-		desc.WP8_AdMob_UnitID = "";// NOTE: Must set event for testing
+		desc.WP8_AdMob_UnitID = "ca-app-pub-2176319445832370/9563358442";// NOTE: Must set event for testing
 
 		desc.WP8_AdDuplex_ApplicationKey = "";// NOTE: Must set event for testing
 		desc.WP8_AdDuplex_UnitID = "";// NOTE: Must set event for testing

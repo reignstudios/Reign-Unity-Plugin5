@@ -2,11 +2,6 @@
 //  Created by Andrew Witte.
 // -------------------------------------------------------
 
-//#define TEST_ASYNC
-#if (UNITY_WINRT && !UNITY_EDITOR) || TEST_ASYNC
-#define ASYNC
-#endif
-
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -94,16 +89,8 @@ namespace Reign
 
 		private static void async_CreatedCallback(bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				creatingAds = false;
-				ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded));
-			});
-			#else
 			creatingAds = false;
 			ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded));
-			#endif
 		}
 
 		private static IEnumerator createdCallbackDelay(bool succeeded)

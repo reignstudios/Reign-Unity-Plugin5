@@ -185,38 +185,22 @@ namespace Reign.EditorTools
 			{
 				var csSources = new string[]
 				{
-					"Shared/WinRT/EmailPlugin.cs",
-					"Shared/WinRT/MarketingPlugin.cs",
-					"Shared/WinRT/MessageBoxPlugin.cs",
+					"WinRT/EmailPlugin.cs",
+					"WinRT/MarketingPlugin.cs",
+					"WinRT/MessageBoxPlugin.cs",
 					#if !WINRT_DISABLE_MS_ADS
-					"Shared/WinRT/MicrosoftAdvertising_AdPlugin.cs",
+					"WinRT/MicrosoftAdvertising_AdPlugin.cs",
 					#endif
 					#if !WINRT_DISABLE_MS_IAP
-					"Shared/WinRT/MicrosoftStore_InAppPurchasePlugin.cs",
+					"WinRT/MicrosoftStore_InAppPurchasePlugin.cs",
 					#endif
-					"Shared/WinRT/StreamPlugin.cs",
-					"Shared/WinRT/SocialPlugin.cs",
-					"Shared/WinRT/WinRTPlugin.cs",
+					"WinRT/StreamPlugin.cs",
+					"WinRT/SocialPlugin.cs",
+					"WinRT/WinRTPlugin.cs",
 
-					#if UNITY_WP8
-					#if !WINRT_DISABLE_GOOGLE_ADS
-					"WP8/AdMob_AdPlugin.cs",
-					"WP8/AdMob_InterstitialAdPlugin.cs",
-					#endif
-
-					#if !WINRT_DISABLE_MS_IAP
-					"WP8/CurrentAppSimulator/CurrentApp.cs",
-					"WP8/CurrentAppSimulator/LicenseInformation.cs",
-					"WP8/CurrentAppSimulator/ListingInformation.cs",
-					"WP8/CurrentAppSimulator/MockIAP.cs",
-					"WP8/CurrentAppSimulator/MockReceiptState.cs",
-					"WP8/CurrentAppSimulator/MockReceiptStore.cs",
-					"WP8/CurrentAppSimulator/ProductLicense.cs",
-					"WP8/CurrentAppSimulator/ProductListing.cs",
-					#endif
-					#elif !WINRT_DISABLE_ADDUPLEX_ADS
-					"Shared/WinRT/AdDuplex_AdPlugin.cs",
-					"Shared/WinRT/AdDuplex_InterstitialAdPlugin.cs",
+					#if !WINRT_DISABLE_ADDUPLEX_ADS
+					"WinRT/AdDuplex_AdPlugin.cs",
+					"WinRT/AdDuplex_InterstitialAdPlugin.cs",
 					#endif
 				};
 
@@ -266,6 +250,11 @@ namespace Reign.EditorTools
 		static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
 		{
 			#if DISABLE_REIGN
+			return;
+			#endif
+		
+			#if UNITY_WP8
+			Debug.LogError("Reign no longer supports Windows Phonee 8.0 in Unity 5");
 			return;
 			#endif
 

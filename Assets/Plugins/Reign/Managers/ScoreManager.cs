@@ -53,14 +53,7 @@ namespace Reign
 
 		private static void async_CreatedCallback(bool succeeded, string errorMessage)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded, errorMessage));
-			});
-			#else
 			ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded, errorMessage));
-			#endif
 		}
 
 		private static IEnumerator createdCallbackDelay(bool succeeded, string errorMessage)

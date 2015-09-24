@@ -186,7 +186,7 @@ namespace Reign
 
 		private static void init_AdDuplex_InterstitialAdPlugin(AdDuplex_InterstitialAdPlugin_WinRT plugin, InterstitialAdDesc desc, InterstitialAdCreatedCallbackMethod createdCallback)
 		{
-			#if UNITY_WP_8_1
+			#if UNITY_WP_8_1 && !WINRT_DISABLE_ADDUPLEX_ADS
 			plugin.Native = new AdDuplex_InterstitialAdPlugin_Native(desc, createdCallback);
 			#else
 			plugin.Native = new Dumy_InterstitialAdPlugin(desc, createdCallback);

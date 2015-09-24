@@ -42,7 +42,10 @@ namespace Reign.Plugin
 				if (type == MessageBoxTypes.Ok)
 				{
 					await msg.ShowAsync();
-					if (callback != null) callback(MessageBoxResult.Ok);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						if (callback != null) callback(MessageBoxResult.Ok);
+					}, false);
 				}
 				else if (type == MessageBoxTypes.OkCancel)
 				{
@@ -50,7 +53,10 @@ namespace Reign.Plugin
 					msg.Commands.Add(new UICommand(options.OkButtonName, new UICommandInvokedHandler((cmd) => result = true)));
 					msg.Commands.Add(new UICommand(options.CancelButtonText, new UICommandInvokedHandler((cmd) => result = false)));
 					await msg.ShowAsync();
-					if (callback != null) callback(result ? MessageBoxResult.Ok : MessageBoxResult.Cancel);
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
+					{
+						if (callback != null) callback(result ? MessageBoxResult.Ok : MessageBoxResult.Cancel);
+					}, false);
 				}
 			});
 			#endif

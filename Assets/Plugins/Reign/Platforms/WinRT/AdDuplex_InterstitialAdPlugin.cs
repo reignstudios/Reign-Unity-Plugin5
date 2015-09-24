@@ -43,10 +43,10 @@ namespace Reign.Plugin
 				await WinRTPlugin.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, delegate()
 				{
 					AdDuplexClient.Initialize(desc.WP8_AdDuplex_ApplicationKey);
-					ReignServices.InvokeOnUnityThread(delegate
+					UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 					{
 						if (createdCallback != null) createdCallback(pass);
-					});
+					}, false);
 				});
 			}
 			else
@@ -57,50 +57,50 @@ namespace Reign.Plugin
 
 		private void ad_AdClicked(object sender, InterstitialAdClickEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Clicked, null);
-			});
+			}, false);
 		}
 
 		private void ad_AdClosed(object sender, InterstitialAdLoadedEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Canceled, null);
-			});
+			}, false);
 		}
 
 		private void ad_ShowingOverlay()
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Shown, null);
-			});
+			}, false);
 		}
 
 		private void ad_AdLoadingError(object sender, InterstitialAdLoadingErrorEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Error, "Error: " + e.Error.Message);
-			});
+			}, false);
 		}
 
 		private void ad_NoAd(object sender, NoAdEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Error, "NoAd Error: " + e.Message);
-			});
+			}, false);
 		}
 
 		private void ad_AdLoaded(object sender, InterstitialAdLoadedEventArgs e)
 		{
-			ReignServices.InvokeOnUnityThread(delegate
+			UnityEngine.WSA.Application.InvokeOnAppThread(()=>
 			{
 				if (eventCallback != null) eventCallback(InterstitialAdEvents.Cached, null);
-			});
+			}, false);
 		}
 
 		public async void Cache()

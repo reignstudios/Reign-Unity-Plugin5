@@ -2,11 +2,6 @@
 //  Created by Andrew Witte.
 // -------------------------------------------------------
 
-//#define TEST_ASYNC
-#if (UNITY_WINRT && !UNITY_EDITOR) || TEST_ASYNC
-#define ASYNC
-#endif
-
 using System;
 using UnityEngine;
 using System.Collections.Generic;
@@ -61,14 +56,7 @@ namespace Reign
 
 		private void async_CreatedCallback(bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded));
-			});
-			#else
 			ReignServices.Singleton.StartCoroutine(createdCallbackDelay(succeeded));
-			#endif
 		}
 
 		private IEnumerator createdCallbackDelay(bool succeeded)
@@ -80,34 +68,16 @@ namespace Reign
 		
 		private void async_RestoreCallback(string inAppID, bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				restoringProducts = false;
-				saveBuyToPrefs(inAppID, succeeded);
-				if (restoreCallback != null) restoreCallback(inAppID, succeeded);
-			});
-			#else
 			restoringProducts = false;
 			saveBuyToPrefs(inAppID, succeeded);
 			if (restoreCallback != null) restoreCallback(inAppID, succeeded);
-			#endif
 		}
 		
 		private void async_BuyCallback(string inAppID, string receipt, bool succeeded)
 		{
-			#if ASYNC
-			ReignServices.InvokeOnUnityThread(delegate
-			{
-				buyingProduct = false;
-				saveBuyToPrefs(inAppID, succeeded);
-				if (buyCallback != null) buyCallback(inAppID, receipt, succeeded);
-			});
-			#else
 			buyingProduct = false;
 			saveBuyToPrefs(inAppID, succeeded);
 			if (buyCallback != null) buyCallback(inAppID, receipt, succeeded);
-			#endif
 		}
 
 		private void saveBuyToPrefs(string inAppID, bool succeeded)
