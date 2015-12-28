@@ -1,6 +1,7 @@
 Reign Unity Plugin - Unity5 edition (Last Build: 1.0.1.0)
 ==================
-This Reign API is a cross-platform, unified API for the Unity game engine.
+This Reign API is a cross-platform, unified API for the Unity game engine.<br>
+Forums: http://reign-studios.net/forums/index.php
 
 Features
 ========================================================================
