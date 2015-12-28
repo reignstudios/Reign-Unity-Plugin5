@@ -254,7 +254,7 @@ namespace Reign.EditorTools
 			#endif
 		
 			#if UNITY_WP8
-			Debug.LogError("Reign no longer supports Windows Phonee 8.0 in Unity 5");
+			Debug.LogError("Reign no longer supports Windows Phone 8.0 in Unity 5");
 			return;
 			#endif
 

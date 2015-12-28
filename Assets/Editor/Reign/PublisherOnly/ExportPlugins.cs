@@ -197,10 +197,8 @@ public static class ExportPlugins
 	private static List<string> getWindowsFiles(List<string> files)
 	{
 		files = getGlobalFiles(files);
-
-		getFilesInPath(Application.dataPath + "/Plugins/WP8/", files);
-		getFilesInPath(Application.dataPath + "/Plugins/Reign/Platforms/WP8/", files);
-		getFilesInPath(Application.dataPath + "/Plugins/Reign/Platforms/Shared/WinRT/", files);
+		
+		getFilesInPath(Application.dataPath + "/Plugins/Reign/Platforms/WinRT/", files);
 		files.Add(Application.dataPath + "/Plugins/Reign/VersionInfo/ReignVersionCheck_WinRT");
 
 		return files;

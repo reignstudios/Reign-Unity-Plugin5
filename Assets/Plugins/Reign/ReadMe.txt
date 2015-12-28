@@ -51,6 +51,14 @@ WinRT (Win8.1, WP8.1, Win10, WP10):
 Other platforms don't need any of this as disabling features don't actually effect anything, can't be controlled or don't increase app size.
 
 ----------------------------
+Android targets
+----------------------------
+To target a specific Android store set one of these compiler directives (Scripting Define Symbols) in Unity's PlayerSettings.
+GOOGLEPLAY
+AMAZON
+SAMSUNG
+
+----------------------------
 Support
 ----------------------------
 For questions you can use the forums:

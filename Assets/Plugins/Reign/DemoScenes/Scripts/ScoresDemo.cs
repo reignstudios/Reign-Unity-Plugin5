@@ -51,9 +51,7 @@ public class ScoresDemo : MonoBehaviour
 		}
 
 		// Leaderboards ---------------------------
-		var leaderboards = new LeaderboardDesc[1];
 		var leaderboard = new LeaderboardDesc();
-		leaderboards[0] = leaderboard;
 		var reignScores_LeaderboardID = new System.Guid("f55e3800-eacd-4728-ae4f-31b00aaa63bf");
 		leaderboard.SortOrder = LeaderboardSortOrders.Ascending;
 		leaderboard.ScoreFormat = LeaderbaordScoreFormats.Numerical;
@@ -100,9 +98,7 @@ public class ScoresDemo : MonoBehaviour
 
 
 		// Achievements ---------------------------
-		var achievements = new AchievementDesc[1];
 		var achievement = new AchievementDesc();
-		achievements[0] = achievement;
 		var reignScores_AchievementID = new System.Guid("352ce53d-142f-4a10-a4fb-804ad38be879");
 
 		// Global
@@ -158,8 +154,8 @@ public class ScoresDemo : MonoBehaviour
 		desc.ReignScores_ServicesURL = "http://localhost:5537/Services/";// Set to your server!
 		desc.ReignScores_GameKey = "04E0676D-AAF8-4836-A584-DE0C1D618D84";// Set to your servers game_api_key!
 		desc.ReignScores_UserKey = "CE8E55E1-F383-4F05-9388-5C89F27B7FF2";// Set to your servers user_api_key!
-		desc.LeaderboardDescs = leaderboards;
-		desc.AchievementDescs = achievements;
+		desc.LeaderboardDescs = new LeaderboardDesc[1] {leaderboard};
+		desc.AchievementDescs = new AchievementDesc[1] {achievement};
 
 		// Editor
 		desc.Editor_ScoreAPI = ScoreAPIs.ReignScores;
