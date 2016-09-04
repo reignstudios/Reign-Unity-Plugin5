@@ -1,33 +1,33 @@
 Reign Unity Plugin - Unity5 edition (Last Build: 1.0.1.0)
 ==================
 This Reign API is a cross-platform, unified API for the Unity game engine.<br>
-Forums: http://reign-studios.net/forums/index.php
+Cached Docs: https://web.archive.org/web/20160318160240/http://reign-studios.net/docs/
 
 Features
 ========================================================================
-• Editor testing.<br>
-• Win8 Privacy Policy (To pass WACK).<br>
-• <strong>Ads:</strong> Microsoft, BB10, AdMob, MM, iAd, ect.<br>
-• <strong>Interstitial Ads:</strong> AdMob.<br>
-• <strong>IAP:</strong> MS-Store, BB10, Apple.<br>
+ï¿½ Editor testing.<br>
+ï¿½ Win8 Privacy Policy (To pass WACK).<br>
+ï¿½ <strong>Ads:</strong> Microsoft, BB10, AdMob, MM, iAd, ect.<br>
+ï¿½ <strong>Interstitial Ads:</strong> AdMob.<br>
+ï¿½ <strong>IAP:</strong> MS-Store, BB10, Apple.<br>
 &nbsp; &nbsp;GooglePlay, Amazon and Samsung.<br>
-• Native Ok/Cancel Message Boxes.<br>
-• Email feedback request.<br>
-• Invoke store page for review.<br>
-• Save/Load/Delete data files.<br>
-• Save/Load Image files to your pictures folder.<br>
-• Save SnapShot to Pictures in one easy call.<br>
-• Native Image/Photo Picker.<br>
-• Native Camera Picker.<br>
-• Save File Picker (Win8 only).<br>
-• Social Image / Text Sharing.<br>
-• GameCenter Leaderboards / Achievements<br>
-• GooglePlay Leaderboards / Achievements<br>
-• GameCircle Leaderboards / Achievements<br>
-• Reign-Scores Leaderboards / Achievements<br>
-• Silverlight ImageTools ported for image processing.<br>
-• SharpZipLib ported to be compatible with all platforms.<br>
-• InputEx for handling Input oddities and managing layouts.<br>
+ï¿½ Native Ok/Cancel Message Boxes.<br>
+ï¿½ Email feedback request.<br>
+ï¿½ Invoke store page for review.<br>
+ï¿½ Save/Load/Delete data files.<br>
+ï¿½ Save/Load Image files to your pictures folder.<br>
+ï¿½ Save SnapShot to Pictures in one easy call.<br>
+ï¿½ Native Image/Photo Picker.<br>
+ï¿½ Native Camera Picker.<br>
+ï¿½ Save File Picker (Win8 only).<br>
+ï¿½ Social Image / Text Sharing.<br>
+ï¿½ GameCenter Leaderboards / Achievements<br>
+ï¿½ GooglePlay Leaderboards / Achievements<br>
+ï¿½ GameCircle Leaderboards / Achievements<br>
+ï¿½ Reign-Scores Leaderboards / Achievements<br>
+ï¿½ Silverlight ImageTools ported for image processing.<br>
+ï¿½ SharpZipLib ported to be compatible with all platforms.<br>
+ï¿½ InputEx for handling Input oddities and managing layouts.<br>
 
 Unity4 Version
 ========================================================================
