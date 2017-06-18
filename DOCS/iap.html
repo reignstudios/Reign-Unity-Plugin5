@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Reign Docs</title>
+</head>
+<body>
+	<b>Step 1</b><br />
+	Declare a "InAppPurchaseID" array object to set up you IAP items.<br />
+	You can create different sets for different platforms.
+	<pre>
+var inAppIDs = new InAppPurchaseID[3];
+inAppIDs[0] = new InAppPurchaseID(item1, 1.99m, "$", InAppPurchaseTypes.NonConsumable);
+inAppIDs[1] = new InAppPurchaseID(item2, 0.99m, "$", InAppPurchaseTypes.NonConsumable);
+inAppIDs[2] = new InAppPurchaseID(item3, 2.49m, "$", InAppPurchaseTypes.Consumable);
+	</pre>
+
+	<b>Step 2</b><br />
+	Now set the basic settings needed for testing.
+	<pre>
+desc.Testing = true;
+	</pre>
+
+	<b>Step 3 (Editor)</b><br />
+	We can test IAP items in the Editor (Look at the IAPDemo scene and code for more info).<br />
+	Set these values for this target platform if needed.
+	<pre>
+desc.Editor_InAppIDs = inAppIDs;
+	</pre>
+
+	<b>Step 3 (WinRT)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+// WinRT
+desc.WinRT_InAppPurchaseAPI = InAppPurchaseAPIs.MicrosoftStore;
+desc.WinRT_MicrosoftStore_InAppIDs = inAppIDs;
+			
+// WP8
+desc.WP8_InAppPurchaseAPI = InAppPurchaseAPIs.MicrosoftStore;
+desc.WP8_MicrosoftStore_InAppIDs = inAppIDs;
+	</pre>
+
+	<b>Step 3 (iOS)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+desc.iOS_InAppPurchaseAPI = InAppPurchaseAPIs.AppleStore;
+desc.iOS_AppleStore_InAppIDs = inAppIDs;
+desc.iOS_AppleStore_SharedSecretKey = "";// NOTE: Must set SharedSecretKey, even for Testing!
+	</pre>
+
+	<b>Step 3 (Android)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+// Choose for either GooglePlay or Amazon.
+// NOTE: Use "player settings" to define compiler directives.
+#if AMAZON
+desc.Android_InAppPurchaseAPI = InAppPurchaseAPIs.Amazon;
+#elif SAMSUNG
+desc.Android_InAppPurchaseAPI = InAppPurchaseAPIs.Samsung;
+#else
+desc.Android_InAppPurchaseAPI = InAppPurchaseAPIs.GooglePlay;
+#endif
+desc.Android_GooglePlay_InAppIDs = inAppIDs;
+desc.Android_GooglePlay_Base64Key = "";// NOTE: Must set Base64Key for GooglePlay in Apps to work, even for Testing!
+desc.Android_Amazon_InAppIDs = inAppIDs;
+desc.Android_Samsung_InAppIDs = inAppIDs;
+desc.Android_Samsung_ItemGroupID = "";
+	</pre>
+
+	<b>Step 4</b><br />
+	Now init the manaager and wait for the callback to fire before using it!
+	<pre>
+InAppPurchaseManager.Init(desc, createdCallback);
+	</pre>
+</body>
+</html>

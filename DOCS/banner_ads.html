@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Reign Docs</title>
+</head>
+<body>
+	<b>Step 1</b><br />
+	Declare a "Ad" object to keep track of and control your Ad states.
+	<pre>
+private static Ad ad;
+	</pre>
+
+	<b>Step 2</b><br />
+	In your Ad init method declare a "AdDesc" object that will be used to init your "Ad" object.
+	<pre>
+var desc = new AdDesc();
+	</pre>
+
+	<b>Step 3</b><br />
+	Now set the basic settings needed for testing your Ad.
+	<pre>
+desc.Testing = true;
+desc.Visible = true;
+	</pre>
+
+	<b>Step 4 (Editor)</b><br />
+	We can test Ads in the Editor (Look at the AdsDemo scene and code for more info).<br />
+	Set these values for this target platform if needed.
+	<pre>
+desc.Editor_AdAPI = AdAPIs.EditorTestAd;// The target API for your Ad (EditorTestAd and MillennialMediaAdvertising supported)
+desc.Editor_AdGravity = AdGravity.BottomCenter;// The position of your Ad
+desc.Editor_AdScale = 1.5f;// The scale of your Ad
+
+// If we are targeting MM-Ads set these.
+desc.Editor_MillennialMediaAdvertising_APID = "";
+desc.Editor_MillennialMediaAdvertising_AdGravity = AdGravity.BottomCenter;
+	</pre>
+
+	<b>Step 4 (WinRT)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+// WinRT settings (Windows 8.1)
+desc.WinRT_AdAPI = AdAPIs.MicrosoftAdvertising;// NOTE: If building for WP 8.1 or Universal targets this value is used. All other WinRT values or used for Win8
+desc.WinRT_MicrosoftAdvertising_ApplicationID = "";
+desc.WinRT_MicrosoftAdvertising_UnitID = "";
+desc.WinRT_MicrosoftAdvertising_AdGravity = AdGravity.BottomCenter;
+desc.WinRT_MicrosoftAdvertising_AdSize = WinRT_MicrosoftAdvertising_AdSize.Wide_728x90;
+//desc.WinRT_MicrosoftAdvertising_UseBuiltInRefresh = false;
+//desc.WinRT_MicrosoftAdvertising_RefreshRate = 120;
+desc.WinRT_AdDuplex_ApplicationKey = "";
+desc.WinRT_AdDuplex_UnitID = "";
+desc.WinRT_AdDuplex_AdGravity = AdGravity.BottomCenter;
+desc.WinRT_AdDuplex_AdSize = WinRT_AdDuplex_AdSize.Wide_728x90;
+//desc.WinRT_AdDuplex_RefreshRate = 120;
+			
+// WP8 settings (Windows Phone 8.1)
+desc.WP8_AdAPI = AdAPIs.MicrosoftAdvertising;// NOTE: If building for WP 8.1 or Universal targets this value is NOT used (Use the WinRT value instead). All other WP8 values are still used for WP 8.0, 8.1 and Universal.
+desc.WP8_MicrosoftAdvertising_ApplicationID = "";
+desc.WP8_MicrosoftAdvertising_UnitID = "";
+desc.WP8_MicrosoftAdvertising_AdGravity = AdGravity.BottomCenter;
+desc.WP8_MicrosoftAdvertising_AdSize = WP8_MicrosoftAdvertising_AdSize.Wide_480x80;
+//desc.WP8_MicrosoftAdvertising_UseBuiltInRefresh = false;
+//desc.WP8_MicrosoftAdvertising_RefreshRate = 120;
+desc.WP8_AdDuplex_ApplicationKey = "";
+desc.WP8_AdDuplex_UnitID = "";
+desc.WP8_AdDuplex_AdGravity = AdGravity.BottomCenter;
+//desc.WP8_AdDuplex_RefreshRate = 120;
+	</pre>
+
+	<b>Step 4 (iOS)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+desc.iOS_AdAPI = AdAPIs.iAd;
+desc.iOS_iAd_AdGravity = AdGravity.BottomCenter;
+			
+desc.iOS_AdMob_AdGravity = AdGravity.BottomCenter;
+desc.iOS_AdMob_UnitID = "";// NOTE: You can use legacy (PublisherID) too, You MUST have this even for Testing!
+desc.iOS_AdMob_AdSize = iOS_AdMob_AdSize.Banner_320x50;
+	</pre>
+
+	<b>Step 4 (Android)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+#if AMAZON
+desc.Android_AdAPI = AdAPIs.Amazon;// Choose between AdMob or Amazon
+#else
+desc.Android_AdAPI = AdAPIs.AdMob;// Choose between AdMob or Amazon
+#endif
+			
+desc.Android_AdMob_UnitID = "";// NOTE: You MUST have this even for Testing!
+desc.Android_AdMob_AdGravity = AdGravity.BottomCenter;
+desc.Android_AdMob_AdSize = Android_AdMob_AdSize.Banner_320x50;
+			
+desc.Android_AmazonAds_ApplicationKey = "";
+desc.Android_AmazonAds_AdSize = Android_AmazonAds_AdSize.Wide_320x50;
+desc.Android_AmazonAds_AdGravity = AdGravity.BottomCenter;
+//desc.Android_AmazonAds_RefreshRate = 120;
+	</pre>
+
+	<b>Step 5</b><br />
+	Now create the Banner Ad and wait for the callback to fire before using it!
+	<pre>
+ad = AdManager.CreateAd(desc, adCreatedCallback);
+	</pre>
+</body>
+</html>

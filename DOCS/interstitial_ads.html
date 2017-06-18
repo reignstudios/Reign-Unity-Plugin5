@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Reign Docs</title>
+</head>
+<body>
+	<b>Step 1</b><br />
+	Declare a "InterstitialAd" object to keep track of and control your Ad states.
+	<pre>
+private static InterstitialAd ad;
+	</pre>
+
+	<b>Step 2</b><br />
+	In your Ad init method declare a "InterstitialAdDesc" object that will be used to init your "Ad" object.
+	<pre>
+var desc = new InterstitialAdDesc();
+	</pre>
+
+	<b>Step 3</b><br />
+	Now set the basic settings needed for testing your Ad.
+	<pre>
+desc.Testing = true;
+desc.EventCallback = eventCallback;
+
+// You can get Ad events in this callback you define
+private static void eventCallback(InterstitialAdEvents adEvent, string eventMessage)
+{
+	Debug.Log(adEvent);
+	switch (adEvent)
+	{
+			case InterstitialAdEvents.Error:
+			Debug.LogError(eventMessage);
+			singleton.MessageText.text = eventMessage;
+			break;
+		case InterstitialAdEvents.Canceled:
+			singleton.MessageText.text = "Ad Canceled!";
+			break;
+		case InterstitialAdEvents.Clicked:
+			singleton.MessageText.text = "Ad Clicked!";
+			break;
+		case InterstitialAdEvents.Cached:
+			adIsCahced = true;
+			singleton.MessageText.text = "Ad Cached!";
+			break;
+		case InterstitialAdEvents.Shown:
+			singleton.MessageText.text = "Ad Shown!";
+			break;
+	}
+}
+	</pre>
+
+	<b>Step 4 (Editor)</b><br />
+	We can test Ads in the Editor (Look at the InterstitialAdDemo scene and code for more info).<br />
+	Set these values for this target platform if needed.
+	<pre>
+// No code required
+	</pre>
+
+	<b>Step 4 (WinRT)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+// WinRT (Windows 8.1)
+desc.WinRT_AdAPI = InterstitialAdAPIs.AdDuplex;// NOTE: If building for WP 8.1 or Universal targets this value is used. All other WinRT values or used for Win8
+// NOTE: Currently no Win8 interstisial API are supported.
+
+// WP8 (Windows Phone 8.1)
+desc.WP8_AdAPI = InterstitialAdAPIs.AdDuplex;// NOTE: If building for WP 8.1 or Universal targets this value is NOT used (Use the WinRT value instead). All other WP8 values are still used for WP 8.0, 8.1 and Universal.
+desc.WP8_AdMob_UnitID = "";// NOTE: Must set event for testing
+desc.WP8_AdDuplex_ApplicationKey = "";// NOTE: Must set event for testing
+desc.WP8_AdDuplex_UnitID = "";// NOTE: Must set event for testing
+	</pre>
+
+	<b>Step 4 (iOS)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+desc.iOS_AdAPI = InterstitialAdAPIs.AdMob;
+desc.iOS_AdMob_UnitID = "";// NOTE: Must set event for testing
+	</pre>
+
+	<b>Step 4 (Android)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+#if AMAZON
+desc.Android_AdAPI = InterstitialAdAPIs.Amazon;
+#else
+desc.Android_AdAPI = InterstitialAdAPIs.AdMob;
+#endif
+desc.Android_AdMob_UnitID = "";// NOTE: Must set event for testing
+desc.Android_Amazon_ApplicationKey = "";// NOTE: Must set event for testing
+	</pre>
+
+	<b>Step 5</b><br />
+	Now create the Banner Ad and wait for the callback to fire before using it!
+	<pre>
+ad = InterstitialAdManager.CreateAd(desc, createdCallback);
+	</pre>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Reign Docs</title>
+</head>
+<body>
+	<h1>Android build steps</h1>
+	<b>Step 1</b><br />
+	<pre>
+First set one of these compiler directives (Scripting Define Symbols) in Unity's PlayerSettings.
+Make sure to set the correct one for your target store.
+GOOGLEPLAY
+AMAZON
+SAMSUNG
+	</pre>
+
+	<b>Step 2</b><br />
+	<pre>
+Now go to the file menu "File->Build Settings".
+In the popup window switch your platform to Android and click the checkbox "Google Android Project" so its on.
+Then build your project and after done the Reign plugin will automaticly run a post-build step to generate the Android Studio proj for you.
+
+NOTE: You can do builds without out doing a "Google Android Project" for testing your game but the plugin will NOT work!
+	</pre>
+
+	<b>Step 3</b><br />
+	<pre>
+In the location you built your Android project you will see two folders.
+One folder will be the name of your project which is what Unity builds out.
+The second folder will be the name of your project but with and extra qualifier of "GooglePlay", "Amazon" or "Samsung".
+Open that second folder with "Android Studio".
+	</pre>
+
+	<b>Step 4</b><br />
+	<pre>
+Once the project is loaded in Android Studio click on the left tab labeled "project".
+Then expand "app->manifiests" and double-click on the "AndroidManifiest.xml".
+Now we need to add the wanted manifiest options referenced in the files under: "{your-unity-proj}/Assets/Plugins/Android/...".
+They are:
+  AndroidManifest_Base = Needed attribuites for all Reign plugin features.
+  AndroidManifest_GooglePlay, AndroidManifest_Amazon and AndroidManifest_Samsung = For platform specific features.
+
+Merge any wanted or needed attribuites in those files into your AndroidManafies.xml located in your Android Studio project.
+After this is done copy the "AndroidManfiest.xml" file into your Unity project folder "Assets/Plugins/Android/..." so you don't have to do this again in the future.
+	</pre>
+</body>
+</html>

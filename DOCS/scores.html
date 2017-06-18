@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Reign Docs</title>
+</head>
+<body>
+	<b>Step 1</b><br />
+	NOTE: Many get confused about this so let me point out that "Reign-Scores" is a self-hosted Leaderboard/Achievement API just like GameCenter and GameCircle are.  Its not required but is an optional target for any platform.<br />
+	Declare as many "LeaderboardDesc" objects as needed.<br />
+	For this example we will just create one.
+	<pre>
+var leaderboard = new LeaderboardDesc();
+leaderboard.SortOrder = LeaderboardSortOrders.Ascending;
+leaderboard.ScoreFormat = LeaderbaordScoreFormats.Numerical;
+leaderboard.ScoreFormat_DecimalPlaces = 0;
+#if UNITY_IOS
+leaderboard.ScoreTimeFormat = LeaderboardScoreTimeFormats.Centiseconds;
+#else
+leaderboard.ScoreTimeFormat = LeaderboardScoreTimeFormats.Milliseconds;
+#endif
+	</pre>
+
+	<b>Step 2</b><br />
+	Now set the platform agnostic ID and desc. (This ID will be used to access your leaderboard instead of a native platform specific one)
+	<pre>
+leaderboard.ID = "Level1";// Any unique ID value you want
+leaderboard.Desc = "Level1 Desc...";// Any desc you want
+	</pre>
+
+	<b>Step 3 (Editor)</b><br />
+	We can test Reign-Scores in the Editor if wanted (Look at the ScoresDemo scene and code for more info).<br />
+	Set these values for this target platform if needed.
+	<pre>
+leaderboard.Editor_ReignScores_ID = new System.Guid("...");// Any unique value
+	</pre>
+
+	<b>Step 3 (WinRT)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+leaderboard.WinRT_ReignScores_ID = new System.Guid("...");// Any unique value
+leaderboard.WP8_ReignScores_ID = new System.Guid("...");// Any unique value
+	</pre>
+
+	<b>Step 3 (iOS)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+leaderboard.iOS_ReignScores_ID = new System.Guid("...");// Any unique value
+leaderboard.iOS_GameCenter_ID = "";// Set to your GameCenter leaderboard ID
+	</pre>
+
+	<b>Step 3 (Android)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+leaderboard.Android_ReignScores_ID = new System.Guid("...");// Any unique value
+leaderboard.Android_GooglePlay_ID = "";// Set to your GooglePlay leaderboard ID (Not Name)
+leaderboard.Android_GameCircle_ID = "";// Set to your GameCircle leaderboard ID (Not Name)
+	</pre>
+
+	<b>Step 4</b><br />
+	Declare as many "AchievementDesc" objects as needed.<br />
+	For this example we will just create one.
+	<pre>
+var achievement = new AchievementDesc();
+	</pre>
+
+	<b>Step 5</b><br />
+	Now set the platform agnostic ID and desc. (This ID will be used to access your achievement instead of a native platform specific one)
+	<pre>
+achievement.ID = "Achievement1";// Any unique ID value you want
+achievement.Name = "Achievement1";// Any name you want
+achievement.Desc = "Achievement1 Desc...";// Any desc you want
+
+// When you report an achievement you pass a PercentComplete value.
+// Example: This allows you to change that ratio to something like (0-1000) before the achievement is unlocked.
+achievement.PercentCompletedAtValue = 100;// NOTE: For GooglePlay you must match this value in the developer dashboard under "How many steps are needed?" option.
+
+// Mark if you want Achievement to use PercentCompleted value or not.
+// Marking this true will make the "PercentComplete" value irrelevant.
+achievement.IsIncremental = true;
+	</pre>
+
+	<b>Step 6 (Editor)</b><br />
+	We can test Reign-Scores in the Editor if wanted (Look at the ScoresDemo scene and code for more info).<br />
+	Set these values for this target platform if needed.
+	<pre>
+achievement.Editor_ReignScores_ID = new System.Guid("...");// Any unique value
+	</pre>
+
+	<b>Step 6 (WinRT)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+achievement.WinRT_ReignScores_ID = new System.Guid("...");// Any unique value
+achievement.WP8_ReignScores_ID = new System.Guid("...");// Any unique value
+	</pre>
+
+	<b>Step 6 (iOS)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+achievement.iOS_ReignScores_ID = new System.Guid("...");// Any unique value
+achievement.iOS_GameCenter_ID = "";// Set to your GameCenter achievement ID
+	</pre>
+
+	<b>Step 6 (Android)</b><br />
+	Set these values for this target platform if needed.
+	<pre>
+achievement.Android_ReignScores_ID = new System.Guid("...");// Any unique value
+achievement.Android_GooglePlay_ID = "";// Set to your GooglePlay achievement ID (Not Name)
+achievement.Android_GameCircle_ID = "";// Set to your GameCircle achievement ID (Not Name)
+	</pre>
+
+	<b>Step 7</b><br />
+	Now its time to actualy init the Score API itself.<br />
+	First lets create its desc object and set it up.
+	<pre>
+var desc = new ScoreDesc();
+desc.ReignScores_UI = ReignScores_ModernRenderer.GetComponent<Reign.Plugin.ReignScores_UnityUI>() as IScores_UI;// Look at the ScoresDemo.cs for more info
+desc.ReignScores_UI.ScoreFormatCallback += scoreFormatCallback;
+desc.ReignScores_ServicesURL = "http://localhost:5537/Services/";// Set to your server!
+desc.ReignScores_GameKey = "04E0676D-AAF8-4836-A584-DE0C1D618D84";// Set to your servers game_api_key!
+desc.ReignScores_UserKey = "CE8E55E1-F383-4F05-9388-5C89F27B7FF2";// Set to your servers user_api_key!
+desc.LeaderboardDescs = new LeaderboardDesc[1] {leaderboard};
+desc.AchievementDescs = new AchievementDesc[1] {achievement};
+	</pre>
+
+	<b>Step 8 (Editor)</b><br />
+	Set up this platforms IDs if needed.
+	<pre>
+desc.Editor_ScoreAPI = ScoreAPIs.ReignScores;
+desc.Editor_ReignScores_GameID = "B2A24047-0487-41C4-B151-0F175BB54D0E";// Get this ID from the Reign-Scores Console.
+	</pre>
+
+	<b>Step 8 (WinRT)</b><br />
+	Set up this platforms IDs if needed.
+	<pre>
+// WinRT
+desc.WinRT_ScoreAPI = ScoreAPIs.ReignScores;
+desc.WinRT_ReignScores_GameID = "B2A24047-0487-41C4-B151-0F175BB54D0E";// Get this ID from the Reign-Scores Console.
+
+// WP8
+desc.WP8_ScoreAPI = ScoreAPIs.ReignScores;
+desc.WP8_ReignScores_GameID = "B2A24047-0487-41C4-B151-0F175BB54D0E";// Get this ID from the Reign-Scores Console.
+	</pre>
+
+	<b>Step 8 (iOS)</b><br />
+	Set up this platforms IDs if needed.
+	<pre>
+desc.iOS_ScoreAPI = ScoreAPIs.GameCenter;// If using GameCenter we don't need to set the 'iOS_ReignScores_GameID' value
+desc.iOS_ReignScores_GameID = "B2A24047-0487-41C4-B151-0F175BB54D0E";// Get this ID from the Reign-Scores Console.
+	</pre>
+
+	<b>Step 8 (Android)</b><br />
+	Set up this platforms IDs if needed.<br />
+	If we arn't using Reign-Scores we don't need to set its ID value.
+	<pre>
+#if GOOGLEPLAY
+desc.Android_ScoreAPI = ScoreAPIs.GooglePlay;
+desc.Android_GooglePlay_DisableUsernameRetrieval = false;// This lets you remove the android.permission.GET_ACCOUNTS requirement if enabled
+#elif AMAZON
+desc.Android_ScoreAPI = ScoreAPIs.GameCircle;
+#else
+desc.Android_ScoreAPI = ScoreAPIs.ReignScores;
+#endif
+desc.Android_ReignScores_GameID = "B2A24047-0487-41C4-B151-0F175BB54D0E";// Get this ID from the Reign-Scores Console.
+	</pre>
+
+	<b>Step 9</b><br />
+	Now init the manaager and wait for the callback to fire before using it!
+	<pre>
+ScoreManager.Init(desc, createdCallback);
+	</pre>
+</body>
+</html>
